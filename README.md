@@ -17,10 +17,18 @@
   - Flutter:
   - Dart:
 - Banco
-  - MySQL: 8.0.x
+  - SQL Server: 2022
 
-# Comandos iniciais
+# Passos iniciais
+Angular
+Cria o client do angular e roda `ng build`
+Gera os componentes necessários
+Dotnet
+Cria um ASP.NET web api e adiciona os pacotes necessários
+Gera os controllers, models e db context
+Adiciona a string de conexão no `appsettings.json`
+Adiciona o **dbcontext** no program.cs
+Gera a migration inicial com o comando `dotnet ef migrations add inicial`
+Caso ocorra tudo certo, rode `dotnet ef database update` 
+Add Cors
 
-ng new
-ng build
-dotnet new web -n
