@@ -8,7 +8,10 @@
   - Package Manager: npm 9.5.1
 - Back
   - Dotnet: 6.0.x
-  - Entity Framework: 6.0.x
+  - Entity Framework Core: 6.0.x
+  - Entity Framework Core SqlServer: 6.0.x
+  - JwtBearer: 6.0.x
+  - AspNetCore.Authorization: 6.0.x
 - Mobile
   - SDK: 33
   - Flutter:
