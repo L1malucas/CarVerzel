@@ -1,10 +1,39 @@
 using CarVerzel.Data;
-using CarVerzel.JwtSettings;
+using JwtSettings;
 using Microsoft.EntityFrameworkCore;
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("JwtConfig"));
+// secret key config as byte array
+var key = Encoding.ASCII.GetBytes(Settings.Secret);
+
+// authentication settings
+builder.Services.AddAuthentication(x =>
+{
+    x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    // validation api setup
+}).AddJwtBearer(x =>
+{
+    x.RequireHttpsMetadata = false;
+    x.SaveToken = true;
+    x.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = new SymmetricSecurityKey(key),
+        ValidateIssuer = false,
+        ValidateAudience = false,
+    };
+});
+
+// create policy of authorization (roles manager and employee)
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("Admin", policy => policy.RequireRole("admin"));
+});
 
 builder.Services.AddControllers();
 

@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using CarVerzel.Data;
 using CarVerzel.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CarVerzel.Controllers
 {
@@ -43,6 +44,7 @@ namespace CarVerzel.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "admin")] 
         public ActionResult<Carro> PostCarro(Carro carro)
         {
             _context.Carros.Add(carro);
@@ -52,6 +54,7 @@ namespace CarVerzel.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize(Roles = "admin")] 
         public IActionResult PutCarro(int id, Carro carro)
         {
             if (id != carro.CarId)
@@ -66,6 +69,7 @@ namespace CarVerzel.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "admin")] 
         public IActionResult DeleteCarro(int id)
         {
             var carro = _context.Carros.Find(id);
