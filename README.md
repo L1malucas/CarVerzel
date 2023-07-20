@@ -14,8 +14,10 @@
   - AspNetCore.Authorization: 6.0.x
 - Mobile
   - SDK: 33
-  - Flutter:
-  - Dart:
+  - Flutter 3.10.5 
+  - Dart 3.0.5 
+  - DevTools 2.23.1
+
 - Banco
   - SQL Server: 2022
 
