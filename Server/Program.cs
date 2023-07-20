@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.Data.SqlClient;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -67,7 +68,7 @@ builder.Services.AddSwaggerGen(c =>
 
     c.AddSecurityRequirement(securityRequirement);
 });
-
+// connection para banco local
 builder.Services.AddDbContext<CarVerzelContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("CarVerzelLocalDb"));
@@ -81,14 +82,30 @@ builder.Services.AddCors(options => options.AddPolicy(name: "CarVerzel",
 
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
+// conncetion para banco azure
+string connectionString = app.Configuration.GetConnectionString("CarVerzelAzureDb")!;
+
+using (var scope = app.Services.CreateScope())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI(c =>
+    var services = scope.ServiceProvider;
+    try
     {
-        c.SwaggerEndpoint("/swagger/v1/swagger.json", "CarVerzel API v1");
-    });
+        var context = services.GetRequiredService<CarVerzelContext>();
+        context.Database.Migrate();
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine("Erro ao migrar o banco de dados: " + ex.Message);
+
+    }
 }
+
+
+app.UseSwagger();
+app.UseSwaggerUI(c =>
+{
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "CarVerzel API v1");
+});
 
 app.UseHttpsRedirection();
 

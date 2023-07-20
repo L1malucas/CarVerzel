@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Code\\CarVerzel\\Server\\Server.csproj": {}
+    "d:\\Code\\CarVerzel\\Server\\Server.csproj": {}
   },
   "projects": {
-    "D:\\Code\\CarVerzel\\Server\\Server.csproj": {
+    "d:\\Code\\CarVerzel\\Server\\Server.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Code\\CarVerzel\\Server\\Server.csproj",
+        "projectUniqueName": "d:\\Code\\CarVerzel\\Server\\Server.csproj",
         "projectName": "Server",
-        "projectPath": "D:\\Code\\CarVerzel\\Server\\Server.csproj",
+        "projectPath": "d:\\Code\\CarVerzel\\Server\\Server.csproj",
         "packagesPath": "C:\\Users\\lucas\\.nuget\\packages\\",
-        "outputPath": "D:\\Code\\CarVerzel\\Server\\obj\\",
+        "outputPath": "d:\\Code\\CarVerzel\\Server\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\lucas\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -48,6 +48,10 @@
             "Microsoft.AspNetCore.Authorization": {
               "target": "Package",
               "version": "[6.0.20, )"
+            },
+            "Microsoft.Data.SqlClient": {
+              "target": "Package",
+              "version": "[5.1.1, )"
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
