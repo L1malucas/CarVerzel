@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace CarVerzel.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/carros")]
     [ApiController]
     public class CarrosController : ControllerBase
     {
@@ -36,7 +36,7 @@ namespace CarVerzel.Controllers
             return carro;
         }
 
-        [HttpGet("ordenadosPorPreco")]
+        [HttpGet("preco")]
         public async Task<ActionResult<IEnumerable<Carro>>> GetCarrosOrdenadosPorPreco()
         {
             var carrosOrdenados = await _context.Carros.OrderBy(c => c.Preco).ToListAsync();
@@ -44,7 +44,7 @@ namespace CarVerzel.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "admin")] 
+        [Authorize(Roles = "admin")]
         public ActionResult<Carro> PostCarro(Carro carro)
         {
             _context.Carros.Add(carro);
@@ -54,7 +54,7 @@ namespace CarVerzel.Controllers
         }
 
         [HttpPut("{id}")]
-        [Authorize(Roles = "admin")] 
+        [Authorize(Roles = "admin")]
         public IActionResult PutCarro(int id, Carro carro)
         {
             if (id != carro.CarId)
@@ -69,7 +69,7 @@ namespace CarVerzel.Controllers
         }
 
         [HttpDelete("{id}")]
-        [Authorize(Roles = "admin")] 
+        [Authorize(Roles = "admin")]
         public IActionResult DeleteCarro(int id)
         {
             var carro = _context.Carros.Find(id);
