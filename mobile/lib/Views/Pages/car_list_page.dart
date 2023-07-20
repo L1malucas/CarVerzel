@@ -13,6 +13,13 @@ class _CarListPageState extends State<CarListPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.manage_accounts),
+          onPressed: () {
+            debugPrint("FILTER BUTTON");
+          },
+        ),
+        centerTitle: true,
         automaticallyImplyLeading: false,
         title: const Text('\t Vitrine'),
         actions: [
@@ -27,6 +34,13 @@ class _CarListPageState extends State<CarListPage> {
         child: SingleChildScrollView(
           child: Column(
             children: [
+              Container(
+                  padding: const EdgeInsets.all(16.0),
+                  width: double.infinity,
+                  child: const Text(
+                    'Recomendações',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                  )),
               Container(
                 margin: const EdgeInsets.only(left: 12.0),
                 height: 200,
@@ -47,6 +61,13 @@ class _CarListPageState extends State<CarListPage> {
                   },
                 ),
               ),
+              Container(
+                  padding: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 4.0),
+                  width: double.infinity,
+                  child: const Text(
+                    'Todos Carros Disponíveis',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                  )),
               Padding(
                 padding: const EdgeInsets.all(12.0),
                 child: GridView.builder(
@@ -55,9 +76,9 @@ class _CarListPageState extends State<CarListPage> {
                   scrollDirection: Axis.vertical,
                   itemCount: 10,
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisSpacing: 10,
+                      crossAxisSpacing: 20,
                       crossAxisCount: 2,
-                      mainAxisSpacing: 10,
+                      mainAxisSpacing: 20,
                       childAspectRatio: 0.7),
                   itemBuilder: (context, index) {
                     return CarPreview(carIndex: index);

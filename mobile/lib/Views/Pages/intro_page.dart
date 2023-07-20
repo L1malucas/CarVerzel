@@ -18,7 +18,6 @@ class IntroPage extends StatelessWidget {
         padding: const EdgeInsets.all(32.0),
         child: Center(
           child: Column(
-            // crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Text(
