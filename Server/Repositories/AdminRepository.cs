@@ -1,6 +1,6 @@
 using CarVerzel.Admin;
 
-namespace CarVerzel.Admin
+namespace CarVerzel.Repository
 {
     public static class AdminRepository
     {
