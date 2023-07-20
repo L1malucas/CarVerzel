@@ -68,10 +68,19 @@ builder.Services.AddSwaggerGen(c =>
 
     c.AddSecurityRequirement(securityRequirement);
 });
-// connection para banco local
+
+// Connection para banco local
+// string localDbConnectionString = builder.Configuration.GetConnectionString("CarVerzelLocalDb");
+// builder.Services.AddDbContext<CarVerzelContext>(options =>
+// {
+//     options.UseSqlServer(localDbConnectionString);
+// });
+
+// Connection para banco Azure
+string azureDbConnectionString = builder.Configuration.GetConnectionString("CarVerzelAzureDb");
 builder.Services.AddDbContext<CarVerzelContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("CarVerzelLocalDb"));
+    options.UseSqlServer(azureDbConnectionString);
 });
 
 builder.Services.AddCors(options => options.AddPolicy(name: "CarVerzel",
@@ -81,26 +90,6 @@ builder.Services.AddCors(options => options.AddPolicy(name: "CarVerzel",
     }));
 
 var app = builder.Build();
-
-// conncetion para banco azure
-string connectionString = app.Configuration.GetConnectionString("CarVerzelAzureDb")!;
-
-try
-{
-    using var conn = new SqlConnection(connectionString);
-    conn.Open();
-
-    var command = new SqlCommand(
-        "CREATE TABLE Carros (CarId int NOT NULL IDENTITY(1, 1), Modelo nvarchar(max) NOT NULL, Marca nvarchar(max) NOT NULL, Preco decimal(10, 2) NOT NULL, Foto nvarchar(max) NOT NULL, CONSTRAINT PK_Carros PRIMARY KEY(CarId)); ",
-        conn);
-    using SqlDataReader reader = command.ExecuteReader();
-}
-catch (Exception e)
-{
-    Console.WriteLine(e.Message);
-}
-
-
 
 app.UseSwagger();
 app.UseSwaggerUI(c =>
