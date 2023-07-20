@@ -5,7 +5,7 @@ using CarVerzel.Repository;
 
 namespace CarVerzel.Controllers
 {
-    [Route("api/admin")]
+    [Route("api/")]
     [ApiController]
     public class AdminController : ControllerBase
     {
