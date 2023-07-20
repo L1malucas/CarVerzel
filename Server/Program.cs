@@ -85,20 +85,21 @@ var app = builder.Build();
 // conncetion para banco azure
 string connectionString = app.Configuration.GetConnectionString("CarVerzelAzureDb")!;
 
-using (var scope = app.Services.CreateScope())
+try
 {
-    var services = scope.ServiceProvider;
-    try
-    {
-        var context = services.GetRequiredService<CarVerzelContext>();
-        context.Database.Migrate();
-    }
-    catch (Exception ex)
-    {
-        Console.WriteLine("Erro ao migrar o banco de dados: " + ex.Message);
+    using var conn = new SqlConnection(connectionString);
+    conn.Open();
 
-    }
+    var command = new SqlCommand(
+        "CREATE TABLE Carros (CarId int NOT NULL IDENTITY(1, 1), Modelo nvarchar(max) NOT NULL, Marca nvarchar(max) NOT NULL, Preco decimal(10, 2) NOT NULL, Foto nvarchar(max) NOT NULL, CONSTRAINT PK_Carros PRIMARY KEY(CarId)); ",
+        conn);
+    using SqlDataReader reader = command.ExecuteReader();
 }
+catch (Exception e)
+{
+    Console.WriteLine(e.Message);
+}
+
 
 
 app.UseSwagger();
