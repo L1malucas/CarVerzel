@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobile/Views/Pages/intro_page.dart';
 
 void main() {
   runApp(const MainApp());
@@ -9,14 +10,10 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
-      ),
+    return MaterialApp(
+      home: const IntroPage(),
       theme: ThemeData(useMaterial3: true),
-      debugShowCheckedModeBanner: false, 
+      debugShowCheckedModeBanner: false,
     );
   }
 }
