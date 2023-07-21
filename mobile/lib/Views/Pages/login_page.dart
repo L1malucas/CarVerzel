@@ -28,6 +28,7 @@ class _LoginPageState extends State<LoginPage> {
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Scaffold(
         appBar: AppBar(
+          leading: const BackButton(color: Colors.white),
           backgroundColor: Colors.grey.shade800,
         ),
         body: SafeArea(
