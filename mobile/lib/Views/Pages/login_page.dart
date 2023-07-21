@@ -1,11 +1,11 @@
 // ignore_for_file: avoid_print, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
-import 'package:mobile/Views/Widgets/loading_widget.dart';
-import 'package:mobile/utils/constants.dart';
 import '../../Services/admin_request.dart';
+import '../../utils/constants.dart';
 import '../Widgets/alert_widget.dart';
 import '../Widgets/fixed_spacer_widget.dart';
+import '../Widgets/loading_widget.dart';
 import 'car_list_page.dart';
 
 class LoginPage extends StatefulWidget {

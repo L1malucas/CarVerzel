@@ -28,7 +28,7 @@ class _CarComponentState extends State<CarComponent> {
         _carModel = carroModel;
       });
     } catch (e) {
-      print('Error fetching carro details: $e');
+      debugPrint('Error fetching carro details: $e');
     }
   }
 
@@ -39,7 +39,7 @@ class _CarComponentState extends State<CarComponent> {
         _carModel = carroModel;
       });
     } catch (e) {
-      print('Error fetching carro details: $e');
+      debugPrint('Error fetching carro details: $e');
     }
   }
 
@@ -73,7 +73,6 @@ class _CarComponentState extends State<CarComponent> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // MARCA
                 FixedSpacer.vNormal(),
                 _carModel?.marca != null
                     ? Text(
@@ -83,7 +82,7 @@ class _CarComponentState extends State<CarComponent> {
                             fontSize: 32, fontWeight: FontWeight.bold),
                       )
                     : const CircularProgressIndicator(),
-                // MODELO
+
                 FixedSpacer.vSmallest(),
                 _carModel?.modelo != null
                     ? Text(
@@ -93,16 +92,16 @@ class _CarComponentState extends State<CarComponent> {
                             fontSize: 32, fontWeight: FontWeight.bold),
                       )
                     : const CircularProgressIndicator(),
-                // IMAGEM
+               
                 FixedSpacer.vNormal(),
                 FixedSpacer.vBiggest(),
-                Image.network(
-                  'https://img.freepik.com/vetores-gratis/um-personagem-de-carro-de-desenho-animado_1308-133087.jpg?w=996&t=st=1689883518~exp=1689884118~hmac=55e86a0c6d990e038750d76cc67c6429f64fc3bb6de449c7a164140f94b95fec', // Verificação de nulo usando o operador de coalescência nula (??)
+                Image.asset(
+                  'assets/images/mock_car.png',
                   fit: BoxFit.cover,
                   width: double.infinity,
                   height: 300,
                 ),
-                // PREÇO
+
                 FixedSpacer.vBiggest(),
               ],
             ),

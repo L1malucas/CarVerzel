@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../../Models/car_model.dart';
 import '../../Services/car_request.dart';
 import '../Widgets/fixed_spacer_widget.dart';
@@ -46,7 +45,7 @@ class _CarPreviewState extends State<CarPreview> {
       }
       setState(() {});
     } catch (e) {
-      print('Error fetching car details: $e');
+      debugPrint('Error fetching car details: $e');
     }
   }
 

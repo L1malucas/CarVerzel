@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:mobile/Views/Pages/car_list_page.dart';
-import 'package:mobile/Views/Widgets/fixed_spacer_widget.dart';
-import 'package:mobile/Views/Widgets/loading_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../Models/car_model.dart';
 import '../../Services/car_request.dart';
 import '../../utils/constants.dart';
+import '../Widgets/fixed_spacer_widget.dart';
+import '../Widgets/loading_widget.dart';
+import 'car_list_page.dart';
 
 class IntroPage extends StatefulWidget {
   const IntroPage({super.key});
@@ -32,7 +32,7 @@ class _IntroPageState extends State<IntroPage> {
         _carros = carrosList;
       });
     } catch (e) {
-      print('Error fetching carro details: $e');
+      debugPrint('Error fetching carro details: $e');
     }
   }
 
