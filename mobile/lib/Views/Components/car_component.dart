@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobile/Models/car_model.dart';
+import 'package:mobile/Views/Pages/create_edit_car_page.dart';
 import '../../Services/car_request.dart';
 import '../Widgets/fixed_spacer_widget.dart';
 
@@ -30,7 +31,8 @@ class _CarComponentState extends State<CarComponent> {
       print('Error fetching carro details: $e');
     }
   }
-    Future<void> getPrice() async {
+
+  Future<void> getPrice() async {
     try {
       final carroModel = await CarRequest.getCarId(widget.carId);
       setState(() {
@@ -45,7 +47,22 @@ class _CarComponentState extends State<CarComponent> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        actions: [IconButton(onPressed: () {}, icon: const Icon(Icons.edit))],
+        actions: [
+          Visibility(
+            visible: adminToken.isEmpty,
+            child: IconButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => CreateEditCar(
+                                isEdit: true,
+                                currentCarModel: _carModel,
+                              )));
+                },
+                icon: const Icon(Icons.edit)),
+          )
+        ],
         centerTitle: true,
         title: const Text('Detalhes'),
       ),

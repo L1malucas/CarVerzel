@@ -4,13 +4,12 @@ import 'package:http/http.dart' as http;
 import '../utils/constants.dart';
 
 class LoginService {
-  static String? jwtAdminToken;
   static Future<Map<String, dynamic>> loginUser(
       String username, String password) async {
     username = username.trim().toLowerCase();
     password = password.trim().toLowerCase();
     const loginUrl = '${Constants.apiAzure}/login';
-    print(loginUrl);
+
     final response = await http.post(
       Uri.parse(loginUrl),
       headers: {'Content-Type': 'application/json'},
@@ -27,7 +26,7 @@ class LoginService {
 
       if (adminData != null) {
         final role = adminData['role'];
-        jwtAdminToken = token;
+        Constants.adminToken = token;
         return {
           'token': token,
           'role': role,

@@ -4,5 +4,5 @@ class Constants {
   static final Uri urlGithubRepo =
       Uri.parse('https://github.com/L1malucas/CarVerzel');
   static const String apiAzure = 'https://carverzelapi.azurewebsites.net/api';
-  static String? token;
+  static String? adminToken;
 }

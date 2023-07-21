@@ -195,8 +195,8 @@ class _LoginPageState extends State<LoginPage> {
       try {
         final loginData = await LoginService.loginUser(username, password);
         final token = loginData['token'];
-        Constants.token = token;
-        bool tokenValidado = Constants.token != null;
+        Constants.adminToken = token;
+        bool tokenValidado = Constants.adminToken != null;
 
         LoadingWidget.showProgressDialog(
             context,

@@ -1,10 +1,9 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:mobile/Services/admin_request.dart';
 import '../Models/car_model.dart';
 import '../utils/constants.dart';
 
-String adminToken = LoginService.jwtAdminToken!;
+String adminToken = Constants.adminToken.toString();
 
 class CarRequest {
   static const baseUrl = '${Constants.apiAzure}/carros';
@@ -48,13 +47,14 @@ class CarRequest {
       Uri.parse(baseUrl),
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer $adminToken',
+        'Authorization': 'Bearer $token',
       },
       body: jsonEncode(carro.toJson()),
     );
 
     if (response.statusCode == 201) {
       final jsonData = jsonDecode(response.body);
+
       return CarModel.fromJson(jsonData);
     } else {
       throw Exception('Falha na request PostCar');
@@ -66,7 +66,7 @@ class CarRequest {
       Uri.parse('$baseUrl/$id'),
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer $adminToken',
+        'Authorization': 'Bearer $token',
       },
       body: jsonEncode(carro.toJson()),
     );
@@ -81,12 +81,13 @@ class CarRequest {
       Uri.parse('$baseUrl/$id'),
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer $adminToken',
+        'Authorization': 'Bearer $token',
       },
     );
-
     if (response.statusCode != 204) {
       throw Exception('Falha na request DeleteCar');
+    } else if (token.isEmpty) {
+      throw Exception('Falha no token');
     }
   }
 }

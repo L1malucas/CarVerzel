@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobile/Views/Components/car_preview.dart';
-import 'package:mobile/Views/Pages/edit_car_page.dart';
+import 'package:mobile/Views/Pages/create_edit_car_page.dart';
 import 'package:mobile/Views/Pages/login_page.dart';
 
 // ignore: must_be_immutable
@@ -31,7 +31,9 @@ class _CarListPageState extends State<CarListPage> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const EditCarPage()));
+                          builder: (context) => CreateEditCar(
+                                isEdit: false,
+                              )));
                 },
                 icon: const Icon(Icons.add),
               ))
