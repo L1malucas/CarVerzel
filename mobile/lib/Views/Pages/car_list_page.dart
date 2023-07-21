@@ -1,10 +1,13 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:mobile/Views/Components/car_preview.dart';
 import 'package:mobile/Views/Pages/login_page.dart';
 
 class CarListPage extends StatefulWidget {
-  const CarListPage({super.key});
+  CarListPage({required this.isTokenValidado, super.key});
 
+  bool isTokenValidado;
   @override
   State<CarListPage> createState() => _CarListPageState();
 }
@@ -15,8 +18,11 @@ class _CarListPageState extends State<CarListPage> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: const Icon(Icons.manage_accounts),
-          onPressed: () {
+          icon: Icon(
+            Icons.manage_accounts,
+            color: widget.isTokenValidado ? Colors.green : Colors.red,
+          ),
+          onPressed: () async {
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => const LoginPage()));
           },

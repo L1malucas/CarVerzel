@@ -1,8 +1,12 @@
-// ignore_for_file: avoid_print
+// ignore_for_file: avoid_print, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
+import 'package:mobile/Views/Widgets/loading_widget.dart';
+import 'package:mobile/utils/constants.dart';
 import '../../Services/admin_request.dart';
-import '../Widgets/fixed_spacer.dart';
+import '../Widgets/alert_widget.dart';
+import '../Widgets/fixed_spacer_widget.dart';
+import 'car_list_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -117,6 +121,12 @@ class _LoginPageState extends State<LoginPage> {
                               borderRadius: BorderRadius.circular(4),
                             ),
                           ),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Preencha o nome';
+                            }
+                            return null;
+                          },
                         ),
                         FixedSpacer.vNormal(),
                         TextFormField(
@@ -140,6 +150,12 @@ class _LoginPageState extends State<LoginPage> {
                               borderRadius: BorderRadius.circular(4),
                             ),
                           ),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Preencha o senha';
+                            }
+                            return null;
+                          },
                         ),
                         FixedSpacer.vNormal(),
                         ConstrainedBox(
@@ -172,25 +188,27 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void _handleLogin() async {
-   
     if (_formKey.currentState!.validate()) {
       final username = _userNameFormController.text;
       final password = _passwordFormController.text;
-      print(
-          'usernamecontroller: ${_userNameFormController.text} \n usernamecontroller: ${_passwordFormController.text}');
       try {
-        
         final loginData = await LoginService.loginUser(username, password);
         final token = loginData['token'];
-        final role = loginData['role'];
+        Constants.token = token;
+        bool tokenValidado = Constants.token != null;
 
-        print('Token: $token');
-        print("\n");
-        print('Role: $role');
-        print("\n");
+        LoadingWidget.showProgressDialog(
+            context,
+            "Validando o login \n Você será redirecionado em caso de sucesso",
+            CarListPage(isTokenValidado: tokenValidado));
       } catch (e) {
-        print('Error: $e');
-        print('$e  ');
+        print(e);
+        Alert(
+                context: context,
+                title: 'Falha no login',
+                message: '$e',
+                type: AlertType.error)
+            .show();
       }
     }
   }
