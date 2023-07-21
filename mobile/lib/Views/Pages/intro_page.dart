@@ -2,12 +2,39 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:mobile/Views/Pages/car_list_page.dart';
 import 'package:mobile/Views/Widgets/fixed_spacer_widget.dart';
+import 'package:mobile/Views/Widgets/loading_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../Models/car_model.dart';
+import '../../Services/car_request.dart';
 import '../../utils/constants.dart';
 
-class IntroPage extends StatelessWidget {
+class IntroPage extends StatefulWidget {
   const IntroPage({super.key});
+
+  @override
+  State<IntroPage> createState() => _IntroPageState();
+}
+
+class _IntroPageState extends State<IntroPage> {
+  List<CarModel> _carros = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _loadCar();
+  }
+
+  Future<void> _loadCar() async {
+    try {
+      final carrosList = await CarRequest.getAllCars();
+      setState(() {
+        _carros = carrosList;
+      });
+    } catch (e) {
+      print('Error fetching carro details: $e');
+    }
+  }
 
   @override
   Widget build(context) {
@@ -70,8 +97,13 @@ class IntroPage extends StatelessWidget {
               style: TextStyle(color: Colors.black87, fontSize: 20),
             ),
             onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => CarListPage(isTokenValidado: false,)));
+              LoadingWidget.showProgressDialog(
+                  context,
+                  'Carregando a vitrine',
+                  CarListPage(
+                    lenght: _carros.length,
+                    isTokenValidado: false,
+                  ));
             },
           ),
         ),

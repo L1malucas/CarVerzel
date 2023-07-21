@@ -5,9 +5,14 @@ import 'package:mobile/Views/Components/car_preview.dart';
 import 'package:mobile/Views/Pages/login_page.dart';
 
 class CarListPage extends StatefulWidget {
-  CarListPage({required this.isTokenValidado, super.key});
-
+  CarListPage({required this.isTokenValidado, required this.lenght, super.key});
+  int lenght;
   bool isTokenValidado;
+
+  CarListPage.withoutLength({required this.isTokenValidado, Key? key})
+      : lenght = 0, 
+        super(key: key);
+
   @override
   State<CarListPage> createState() => _CarListPageState();
 }
@@ -55,7 +60,7 @@ class _CarListPageState extends State<CarListPage> {
                 child: GridView.builder(
                   shrinkWrap: true,
                   scrollDirection: Axis.horizontal,
-                  itemCount: 10,
+                  itemCount: widget.lenght,
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisSpacing: 10,
                       crossAxisCount: 1,
@@ -82,7 +87,7 @@ class _CarListPageState extends State<CarListPage> {
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   scrollDirection: Axis.vertical,
-                  itemCount: 10,
+                  itemCount: widget.lenght,
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisSpacing: 20,
                       crossAxisCount: 2,

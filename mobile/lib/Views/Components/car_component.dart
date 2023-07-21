@@ -17,12 +17,22 @@ class _CarComponentState extends State<CarComponent> {
   @override
   void initState() {
     super.initState();
-    _loadCar();
+    getAll();
   }
 
-  Future<void> _loadCar() async {
+  Future<void> getAll() async {
     try {
-      final carroModel = await CarrosApi.fetchCarro(widget.carId);
+      final carroModel = await CarRequest.getCarId(widget.carId);
+      setState(() {
+        _carModel = carroModel;
+      });
+    } catch (e) {
+      print('Error fetching carro details: $e');
+    }
+  }
+    Future<void> getPrice() async {
+    try {
+      final carroModel = await CarRequest.getCarId(widget.carId);
       setState(() {
         _carModel = carroModel;
       });
@@ -35,6 +45,7 @@ class _CarComponentState extends State<CarComponent> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        actions: [IconButton(onPressed: () {}, icon: const Icon(Icons.edit))],
         centerTitle: true,
         title: const Text('Detalhes'),
       ),
@@ -99,7 +110,7 @@ class _CarComponentState extends State<CarComponent> {
                       fontWeight: FontWeight.bold,
                       color: Colors.white),
                 )
-              : const CircularProgressIndicator(),
+              : const LinearProgressIndicator(),
         ),
       ),
     );

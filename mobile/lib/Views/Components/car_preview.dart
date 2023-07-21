@@ -27,7 +27,7 @@ class _CarPreviewState extends State<CarPreview> {
 
   Future<void> _loadCar() async {
     try {
-      final carrosList = await CarrosApi.getTodosCarros();
+      final carrosList = await CarRequest.getAllCars();
       setState(() {
         _carros = carrosList;
       });
@@ -72,18 +72,22 @@ class _CarPreviewState extends State<CarPreview> {
               SizedBox(
                 width: double.infinity,
                 height: 30,
-                child: Text(
-                    '${_carros[widget.carIndex + 1].marca}  ${_carros[widget.carIndex + 1].modelo}'),
+                child: _carros.isNotEmpty
+                    ? Text(
+                        '${_carros[widget.carIndex].marca}  ${_carros[widget.carIndex].modelo}')
+                    : const CircularProgressIndicator(), // Show loading indicator when _carros is empty
               ),
               SizedBox(
                 height: 20,
-                child: Text(
-                  'PREÇO R\$${widget.carIndex}',
-                  style: const TextStyle(
-                      fontSize: 14,
-                      color: Colors.black87,
-                      fontWeight: FontWeight.bold),
-                ),
+                child: _carros.isNotEmpty
+                    ? Text(
+                        'PREÇO R\$${widget.carIndex}',
+                        style: const TextStyle(
+                            fontSize: 14,
+                            color: Colors.black87,
+                            fontWeight: FontWeight.bold),
+                      )
+                    : Container(), // Show empty container when _carros is empty
               ),
             ],
           ),

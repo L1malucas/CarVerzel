@@ -201,7 +201,9 @@ class _LoginPageState extends State<LoginPage> {
         LoadingWidget.showProgressDialog(
             context,
             "Validando o login \n Você será redirecionado em caso de sucesso",
-            CarListPage(isTokenValidado: tokenValidado));
+            CarListPage.withoutLength(
+              isTokenValidado: tokenValidado,
+            ));
       } catch (e) {
         print(e);
         Alert(
