@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mobile/Views/Components/car_component.dart';
 
+import '../../Models/car_model.dart';
+import '../../Services/car_request.dart';
 import '../Widgets/fixed_spacer.dart';
 
 //ignore: must_be_immutable
@@ -15,6 +17,25 @@ class CarPreview extends StatefulWidget {
 }
 
 class _CarPreviewState extends State<CarPreview> {
+  List<CarModel> _carros = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _loadCar();
+  }
+
+  Future<void> _loadCar() async {
+    try {
+      final carrosList = await CarrosApi.getTodosCarros();
+      setState(() {
+        _carros = carrosList;
+      });
+    } catch (e) {
+      print('Error fetching carro details: $e');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -51,7 +72,8 @@ class _CarPreviewState extends State<CarPreview> {
               SizedBox(
                 width: double.infinity,
                 height: 30,
-                child: Text('MARCA + MODELO ${widget.carIndex}'),
+                child: Text(
+                    '${_carros[widget.carIndex + 1].marca}  ${_carros[widget.carIndex + 1].modelo}'),
               ),
               SizedBox(
                 height: 20,
@@ -71,7 +93,7 @@ class _CarPreviewState extends State<CarPreview> {
         Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => CarComponent(index: widget.carIndex)));
+                builder: (context) => CarComponent(carId: widget.carIndex)));
       },
     );
   }

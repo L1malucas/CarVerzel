@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobile/Views/Components/car_preview.dart';
+import 'package:mobile/Views/Pages/login_page.dart';
 
 class CarListPage extends StatefulWidget {
   const CarListPage({super.key});
@@ -16,7 +17,8 @@ class _CarListPageState extends State<CarListPage> {
         leading: IconButton(
           icon: const Icon(Icons.manage_accounts),
           onPressed: () {
-            debugPrint("FILTER BUTTON");
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const LoginPage()));
           },
         ),
         centerTitle: true,
