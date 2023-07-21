@@ -3,7 +3,7 @@ import 'package:mobile/Views/Components/car_component.dart';
 
 import '../../Models/car_model.dart';
 import '../../Services/car_request.dart';
-import '../Widgets/fixed_spacer.dart';
+import '../Widgets/fixed_spacer_widget.dart';
 
 //ignore: must_be_immutable
 class CarPreview extends StatefulWidget {

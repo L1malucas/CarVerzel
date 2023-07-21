@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:mobile/Views/Pages/car_list_page.dart';
-import 'package:mobile/Views/Widgets/fixed_spacer.dart';
+import 'package:mobile/Views/Widgets/fixed_spacer_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../utils/constants.dart';
@@ -71,7 +71,7 @@ class IntroPage extends StatelessWidget {
             ),
             onPressed: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const CarListPage()));
+                  MaterialPageRoute(builder: (context) => CarListPage(isTokenValidado: false,)));
             },
           ),
         ),

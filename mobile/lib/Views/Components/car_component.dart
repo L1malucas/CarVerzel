@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobile/Models/car_model.dart';
 import '../../Services/car_request.dart';
-import '../Widgets/fixed_spacer.dart';
+import '../Widgets/fixed_spacer_widget.dart';
 
 class CarComponent extends StatefulWidget {
   const CarComponent({required this.carId, super.key});
