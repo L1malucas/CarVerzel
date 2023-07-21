@@ -1,4 +1,3 @@
-// ignore_for_file: avoid_print
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:mobile/Services/admin_request.dart';
@@ -7,37 +6,45 @@ import '../utils/constants.dart';
 
 String adminToken = LoginService.jwtAdminToken!;
 
-class CarrosApi {
+class CarRequest {
   static const baseUrl = '${Constants.apiAzure}/carros';
 
-  static Future<CarModel> fetchCarro(int id) async {
+  static Future<CarModel> getCarId(int id) async {
     final response = await http.get(Uri.parse('$baseUrl/$id'));
-    print(baseUrl);
 
     if (response.statusCode == 200) {
       final jsonData = jsonDecode(response.body);
       final carModel = CarModel.fromJson(jsonData);
-      print(
-          '{$carModel.id} ${carModel.marca} ${carModel.modelo}${carModel.preco}');
       return carModel;
     } else {
-      throw Exception('Failed to fetch carro');
+      throw Exception('Falha na request GetId');
     }
   }
 
-  static Future<List<CarModel>> getTodosCarros() async {
+  static Future<CarModel> getCarPrice() async {
+    final response = await http.get(Uri.parse('$baseUrl/preco'));
+
+    if (response.statusCode == 200) {
+      final jsonData = jsonDecode(response.body);
+      final carModel = CarModel.fromJson(jsonData);
+      return carModel;
+    } else {
+      throw Exception('Falha na request GetPrice');
+    }
+  }
+
+  static Future<List<CarModel>> getAllCars() async {
     final response = await http.get(Uri.parse(baseUrl));
-    print(baseUrl);
 
     if (response.statusCode == 200) {
       final List<dynamic> jsonData = jsonDecode(response.body);
       return jsonData.map((json) => CarModel.fromJson(json)).toList();
     } else {
-      throw Exception('Failed to fetch carros');
+      throw Exception('Falha na request GetAll');
     }
   }
 
-  static Future<CarModel> postCarro(String token, CarModel carro) async {
+  static Future<CarModel> postCar(String token, CarModel carro) async {
     final response = await http.post(
       Uri.parse(baseUrl),
       headers: {
@@ -51,11 +58,11 @@ class CarrosApi {
       final jsonData = jsonDecode(response.body);
       return CarModel.fromJson(jsonData);
     } else {
-      throw Exception('Failed to create carro');
+      throw Exception('Falha na request PostCar');
     }
   }
 
-  static Future<void> putCarro(String token, int id, CarModel carro) async {
+  static Future<void> putCar(String token, int id, CarModel carro) async {
     final response = await http.put(
       Uri.parse('$baseUrl/$id'),
       headers: {
@@ -66,11 +73,11 @@ class CarrosApi {
     );
 
     if (response.statusCode != 204) {
-      throw Exception('Failed to update carro');
+      throw Exception('Falha na request PutCar');
     }
   }
 
-  static Future<void> deleteCarro(String token, int id) async {
+  static Future<void> deleteCar(String token, int id) async {
     final response = await http.delete(
       Uri.parse('$baseUrl/$id'),
       headers: {
@@ -80,7 +87,7 @@ class CarrosApi {
     );
 
     if (response.statusCode != 204) {
-      throw Exception('Failed to delete carro');
+      throw Exception('Falha na request DeleteCar');
     }
   }
 }
