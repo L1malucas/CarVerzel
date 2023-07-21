@@ -1,43 +1,75 @@
 import 'package:flutter/material.dart';
-import 'package:mobile/Views/Components/car_component.dart';
 
 import '../../Models/car_model.dart';
 import '../../Services/car_request.dart';
 import '../Widgets/fixed_spacer_widget.dart';
+import 'car_component.dart';
+
+enum CarListType {
+  allCars,
+  carsByPrice,
+}
 
 //ignore: must_be_immutable
 class CarPreview extends StatefulWidget {
-  CarPreview({this.height, required this.carIndex, super.key});
+  CarPreview({
+    this.height,
+    required this.carIndex,
+    required this.carListType,
+    Key? key,
+  }) : super(key: key);
 
   double? height;
   int carIndex;
-
+  CarListType carListType;
   @override
   State<CarPreview> createState() => _CarPreviewState();
 }
 
 class _CarPreviewState extends State<CarPreview> {
-  List<CarModel> _carros = [];
+  List<CarModel> _carrosAll = [];
+  List<CarModel> _carrosPrice = [];
 
   @override
   void initState() {
     super.initState();
-    _loadCar();
+    _fetchData();
   }
 
-  Future<void> _loadCar() async {
+  Future<void> _fetchData() async {
     try {
-      final carrosList = await CarRequest.getAllCars();
-      setState(() {
-        _carros = carrosList;
-      });
+      if (widget.carListType == CarListType.allCars && _carrosAll.isEmpty) {
+        _carrosAll = await CarRequest.getAllCars();
+      } else if (widget.carListType == CarListType.carsByPrice &&
+          _carrosPrice.isEmpty) {
+        _carrosPrice = await CarRequest.getCarPrice();
+      }
+      setState(() {});
     } catch (e) {
-      print('Error fetching carro details: $e');
+      print('Error fetching car details: $e');
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    List<CarModel> carList;
+    if (widget.carListType == CarListType.allCars) {
+      carList = _carrosAll;
+    } else if (widget.carListType == CarListType.carsByPrice) {
+      carList = _carrosPrice;
+    } else {
+      carList = [];
+    }
+
+    CarModel car;
+    if (carList.isNotEmpty && widget.carIndex < carList.length) {
+      car = carList[widget.carIndex];
+    } else {
+      return const Center(
+        child: CircularProgressIndicator(),
+      );
+    }
+
     return InkWell(
       child: Container(
         padding: const EdgeInsets.only(left: 4),
@@ -57,37 +89,37 @@ class _CarPreviewState extends State<CarPreview> {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(4.0),
                       //PATH DA IMAGEM
-                      child: Image.network(
-                        'https://img.freepik.com/vetores-gratis/um-personagem-de-carro-de-desenho-animado_1308-133087.jpg?w=996&t=st=1689883518~exp=1689884118~hmac=55e86a0c6d990e038750d76cc67c6429f64fc3bb6de449c7a164140f94b95fec',
-                        fit: BoxFit.cover,
-                        height: widget.height,
-                      ),
+                      child: carList.isNotEmpty
+                          ? Image.asset(
+                              'assets/images/mock_car.png',
+                              fit: BoxFit.cover,
+                              height: widget.height,
+                            )
+                          : const LinearProgressIndicator(),
                     ),
                   ),
                 ],
               ),
-              // Container(
-              //),
               FixedSpacer.vNormal(),
               SizedBox(
                 width: double.infinity,
                 height: 30,
-                child: _carros.isNotEmpty
-                    ? Text(
-                        '${_carros[widget.carIndex].marca}  ${_carros[widget.carIndex].modelo}')
-                    : const CircularProgressIndicator(), // Show loading indicator when _carros is empty
+                child: carList.isNotEmpty
+                    ? Text('${car.marca}  ${car.modelo}')
+                    : const LinearProgressIndicator(),
               ),
               SizedBox(
                 height: 20,
-                child: _carros.isNotEmpty
+                child: carList.isNotEmpty
                     ? Text(
-                        'PREÇO R\$${widget.carIndex}',
+                        'PREÇO R\$${car.preco}',
                         style: const TextStyle(
-                            fontSize: 14,
-                            color: Colors.black87,
-                            fontWeight: FontWeight.bold),
+                          fontSize: 14,
+                          color: Colors.black87,
+                          fontWeight: FontWeight.bold,
+                        ),
                       )
-                    : Container(), // Show empty container when _carros is empty
+                    : const LinearProgressIndicator(),
               ),
             ],
           ),
@@ -97,7 +129,7 @@ class _CarPreviewState extends State<CarPreview> {
         Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => CarComponent(carId: widget.carIndex)));
+                builder: (context) => CarComponent(carId: car.id)));
       },
     );
   }

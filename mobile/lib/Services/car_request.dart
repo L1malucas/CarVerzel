@@ -21,15 +21,14 @@ class CarRequest {
     }
   }
 
-  static Future<CarModel> getCarPrice() async {
+  static Future<List<CarModel>> getCarPrice() async {
     final response = await http.get(Uri.parse('$baseUrl/preco'));
 
     if (response.statusCode == 200) {
-      final jsonData = jsonDecode(response.body);
-      final carModel = CarModel.fromJson(jsonData);
-      return carModel;
+      final List<dynamic> jsonData = jsonDecode(response.body);
+      return jsonData.map((json) => CarModel.fromJson(json)).toList();
     } else {
-      throw Exception('Falha na request GetPrice');
+      throw Exception('Falha na request GetAll');
     }
   }
 

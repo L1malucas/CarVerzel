@@ -4,13 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:mobile/Views/Components/car_preview.dart';
 import 'package:mobile/Views/Pages/login_page.dart';
 
+// ignore: must_be_immutable
 class CarListPage extends StatefulWidget {
   CarListPage({required this.isTokenValidado, required this.lenght, super.key});
   int lenght;
   bool isTokenValidado;
 
   CarListPage.withoutLength({required this.isTokenValidado, Key? key})
-      : lenght = 0, 
+      : lenght = 0,
         super(key: key);
 
   @override
@@ -35,13 +36,6 @@ class _CarListPageState extends State<CarListPage> {
         centerTitle: true,
         automaticallyImplyLeading: false,
         title: const Text('\t Vitrine'),
-        actions: [
-          IconButton(
-              onPressed: () {
-                debugPrint("FILTER BUTTON");
-              },
-              icon: const Icon(Icons.filter_alt))
-        ],
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -68,6 +62,7 @@ class _CarListPageState extends State<CarListPage> {
                       childAspectRatio: 0.7),
                   itemBuilder: (context, index) {
                     return CarPreview(
+                      carListType: CarListType.carsByPrice,
                       carIndex: index,
                       height: 100,
                     );
@@ -94,7 +89,10 @@ class _CarListPageState extends State<CarListPage> {
                       mainAxisSpacing: 20,
                       childAspectRatio: 0.7),
                   itemBuilder: (context, index) {
-                    return CarPreview(carIndex: index);
+                    return CarPreview(
+                      carListType: CarListType.allCars,
+                      carIndex: index,
+                    );
                   },
                 ),
               ),
