@@ -1,24 +1,23 @@
 using CarVerzel.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace CarVerzel.Data
+namespace CarVerzel.Data;
+
+public class CarVerzelContext : DbContext
 {
-    public class CarVerzelContext : DbContext
+    public CarVerzelContext(DbContextOptions<CarVerzelContext> options) : base(options)
     {
-        public CarVerzelContext(DbContextOptions<CarVerzelContext> options) : base(options)
-        {
-            Database.EnsureCreated();
-        }
+        Database.EnsureCreated();
+    }
 
-        public DbSet<Carro> Carros { get; set; }
+    public DbSet<Carro>? Carros { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Carro>(entity =>
         {
-            modelBuilder.Entity<Carro>(entity =>
-            {
-                entity.Property(e => e.Preco)
-                    .HasColumnType("decimal(10, 2)");
-            });
-        }
+            entity.Property(e => e.Preco)
+                .HasColumnType("decimal(10, 2)");
+        });
     }
 }

@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
-using Microsoft.Data.SqlClient;
+// using Microsoft.Data.SqlClient;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,7 +30,7 @@ builder.Services.AddAuthentication(x =>
     };
 });
 
-// create policy of authorization (roles manager and employee)
+// create policy of authorization (role admin)
 builder.Services.AddAuthorization(options =>
 {
     options.AddPolicy("Admin", policy => policy.RequireRole("admin"));
