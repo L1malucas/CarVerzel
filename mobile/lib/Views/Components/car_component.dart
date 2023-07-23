@@ -49,7 +49,7 @@ class _CarComponentState extends State<CarComponent> {
       appBar: AppBar(
         actions: [
           Visibility(
-            visible: adminToken.isEmpty,
+            visible: adminToken.isNotEmpty,
             child: IconButton(
                 onPressed: () {
                   Navigator.push(
@@ -82,7 +82,6 @@ class _CarComponentState extends State<CarComponent> {
                             fontSize: 32, fontWeight: FontWeight.bold),
                       )
                     : const CircularProgressIndicator(),
-
                 FixedSpacer.vSmallest(),
                 _carModel?.modelo != null
                     ? Text(
@@ -92,7 +91,6 @@ class _CarComponentState extends State<CarComponent> {
                             fontSize: 32, fontWeight: FontWeight.bold),
                       )
                     : const CircularProgressIndicator(),
-               
                 FixedSpacer.vNormal(),
                 FixedSpacer.vBiggest(),
                 Image.asset(
@@ -101,7 +99,6 @@ class _CarComponentState extends State<CarComponent> {
                   width: double.infinity,
                   height: 300,
                 ),
-
                 FixedSpacer.vBiggest(),
               ],
             ),

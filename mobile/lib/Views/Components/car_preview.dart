@@ -3,7 +3,6 @@ import '../../Models/car_model.dart';
 import '../Widgets/fixed_spacer_widget.dart';
 import 'car_component.dart';
 
-
 // ignore: must_be_immutable
 class CarPreview extends StatelessWidget {
   CarPreview({

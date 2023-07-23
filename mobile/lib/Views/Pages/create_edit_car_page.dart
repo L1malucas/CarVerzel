@@ -284,7 +284,7 @@ class _CreateEditCarState extends State<CreateEditCar> {
       existingCar.modelo = _modeloFormController.text;
       existingCar.marca = _marcaFormController.text;
       existingCar.preco = double.parse(_precoFormController.text);
-      existingCar.foto = _fotoFormController.text;
+      existingCar.foto = imageFile!.path;
 
       try {
         await CarRequest.putCar(adminToken, _currentId, existingCar);
