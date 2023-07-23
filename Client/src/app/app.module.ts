@@ -7,12 +7,14 @@ import { CarListComponent } from './car-list/car-list.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { LoginComponent } from './login/login.component';
 import { FormsModule } from '@angular/forms';
+import { CarFormComponent } from './car-form/car-form.component';
 @NgModule({
   declarations: [
     AppComponent,
     CarListComponent,
     NavbarComponent,
     LoginComponent,
+    CarFormComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
   providers: [],

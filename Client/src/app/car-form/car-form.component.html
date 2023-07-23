@@ -1,0 +1,25 @@
+<h2>Add New Car</h2>
+
+<form (ngSubmit)="onSubmit()">
+  <div>
+    <label for="modelo">Modelo:</label>
+    <input type="text" id="modelo" name="modelo" [(ngModel)]="modelo" required>
+  </div>
+
+  <div>
+    <label for="marca">Marca:</label>
+    <input type="text" id="marca" name="marca" [(ngModel)]="marca" required>
+  </div>
+
+  <div>
+    <label for="preco">Preço:</label>
+    <input type="number" id="preco" name="preco" [(ngModel)]="preco" required>
+  </div>
+
+  <div>
+    <label for="foto">Foto:</label>
+    <input type="file" id="foto" name="foto" (change)="onFileSelected($event)">
+  </div>
+
+  <button type="submit">Submit</button>
+</form>
