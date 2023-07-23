@@ -19,5 +19,6 @@ public class CarVerzelContext : DbContext
             entity.Property(e => e.Preco)
                 .HasColumnType("decimal(10, 3)");
         });
+        modelBuilder.HasAnnotation("SqlServer:CreateTableIfNotExists", true);
     }
 }

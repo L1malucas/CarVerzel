@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
-// using Microsoft.Data.SqlClient;
+using Microsoft.Data.SqlClient;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -70,18 +70,11 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 // Connection para banco local
-// string localDbConnectionString = builder.Configuration.GetConnectionString("CarVerzelLocalDb");
-// builder.Services.AddDbContext<CarVerzelContext>(options =>
-// {
-//     options.UseSqlServer(localDbConnectionString);
-// });
-
-// Connection para banco Azure
-string azureDbConnectionString = builder.Configuration.GetConnectionString("CarVerzelAzureDb");
 builder.Services.AddDbContext<CarVerzelContext>(options =>
 {
-    options.UseSqlServer(azureDbConnectionString);
+    options.UseSqlServer(builder.Configuration.GetConnectionString("CarVerzelLocalDb"));
 });
+
 
 builder.Services.AddCors(options => options.AddPolicy(name: "CarVerzel",
     policy =>

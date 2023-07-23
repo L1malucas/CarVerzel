@@ -16,5 +16,6 @@ public class Carro
     [Required]
     public decimal Preco { get; set; }
 
+    [Required]
     public string Foto { get; set; } = string.Empty;
 }
