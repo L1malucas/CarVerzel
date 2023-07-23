@@ -7,7 +7,19 @@ public class CarVerzelContext : DbContext
 {
     public CarVerzelContext(DbContextOptions<CarVerzelContext> options) : base(options)
     {
-        Database.EnsureCreated();
+
+        if (Database.GetPendingMigrations().Any())
+        {
+            // Database.Migrate();
+        }
+        else
+        {
+            bool hasCarrosTable = Model.FindEntityType(typeof(Carro)) != null;
+            if (!hasCarrosTable)
+            {
+                Database.EnsureCreated();
+            }
+        }
     }
 
     public DbSet<Carro>? Carros { get; set; }
@@ -19,6 +31,6 @@ public class CarVerzelContext : DbContext
             entity.Property(e => e.Preco)
                 .HasColumnType("decimal(10, 3)");
         });
-        modelBuilder.HasAnnotation("SqlServer:CreateTableIfNotExists", true);
     }
 }
+// eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImJhdG1hbiIsInJvbGUiOiJhZG1pbiIsIm5iZiI6MTY5MDEyMDI0OSwiZXhwIjoxNjkwMTYzNDQ5LCJpYXQiOjE2OTAxMjAyNDl9.JzgiZHRrcyJRY3d8lkmMHRtMm8SEjlKPfnhUHNFKS_g

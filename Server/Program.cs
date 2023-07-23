@@ -75,6 +75,11 @@ builder.Services.AddDbContext<CarVerzelContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("CarVerzelLocalDb"));
 });
 
+// string azureDbConnectionString = builder.Configuration.GetConnectionString("CarVerzelAzureDb");
+// builder.Services.AddDbContext<CarVerzelContext>(options =>
+// {
+//     options.UseSqlServer(azureDbConnectionString);
+// });
 
 builder.Services.AddCors(options => options.AddPolicy(name: "CarVerzel",
     policy =>
