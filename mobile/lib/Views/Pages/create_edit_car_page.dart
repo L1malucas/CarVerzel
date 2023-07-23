@@ -1,6 +1,7 @@
 // ignore_for_file: avoid_print, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
+
 import '../../Models/car_model.dart';
 import '../../Services/car_request.dart';
 import '../Widgets/alert_widget.dart';
@@ -160,32 +161,27 @@ class _CreateEditCarState extends State<CreateEditCar> {
                       },
                     ),
                     FixedSpacer.vNormal(),
-                    TextFormField(
-                      controller: _fotoFormController,
-                      keyboardType: TextInputType.name,
-                      // obscureText: true,
-                      decoration: InputDecoration(
-                        hintText: "Selecione a foto",
-                        border: const OutlineInputBorder(),
-                        fillColor: Colors.grey.shade300,
-                        filled: true,
-                        focusedBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Theme.of(context).primaryColor),
-                          borderRadius: BorderRadius.circular(4),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                              color: Theme.of(context).colorScheme.secondary),
-                          borderRadius: BorderRadius.circular(4),
-                        ),
-                      ),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Selecione uma foto';
-                        }
-                        return null;
-                      },
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        InkWell(
+                          child: Container(
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(2.0),
+                                color: Colors.blue[100],
+                                border: Border.all(
+                                    color: Colors.white, width: 2.0)),
+                            width: 70,
+                            height: 70,
+                            child: Icon(
+                              Icons.add,
+                              color: Colors.blue[700],
+                              size: 24,
+                            ),
+                          ),
+                          onTap: () {},
+                        )
+                      ],
                     ),
                     FixedSpacer.vNormal(),
                     ConstrainedBox(
