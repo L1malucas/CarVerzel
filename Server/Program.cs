@@ -82,10 +82,9 @@ builder.Services.AddDbContext<CarVerzelContext>(options =>
     options.UseSqlServer(azureDbConnectionString);
 });
 
-builder.Services.AddCors(options => options.AddPolicy(name: "CarVerzel",
-    policy =>
+builder.Services.AddCors(p => p.AddPolicy("CarVerzel", builder =>
     {
-        policy.WithOrigins("http://localhost:7094").AllowAnyMethod().AllowAnyHeader();
+        builder.WithOrigins("*").AllowAnyMethod().AllowAnyHeader();
     }));
 
 var app = builder.Build();
