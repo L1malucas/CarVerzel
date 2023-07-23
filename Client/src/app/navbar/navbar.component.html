@@ -1,0 +1,22 @@
+<nav class="navbar navbar-expand navbar-light bg-light">
+  <a class="navbar-brand" href="#">CarVerzel</a>
+  <div class="collapse navbar-collapse">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a
+          class="nav-link"
+          href="https://github.com/L1malucas/CarVerzel/"
+          target="_blank"
+          >About</a
+        >
+      </li>
+
+      <li class="nav-item" *ngIf="!isLoggedIn">
+        <a class="nav-link" href="#">Login</a>
+      </li>
+      <li class="nav-item" *ngIf="isLoggedIn">
+        <a class="nav-link" href="#">Logout</a>
+      </li>
+    </ul>
+  </div>
+</nav>

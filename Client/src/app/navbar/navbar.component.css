@@ -1,0 +1,12 @@
+
+.navbar {
+  background-color: #f8f9fa;
+}
+
+.navbar-brand {
+  font-weight: bold;
+}
+
+.nav-link {
+  cursor: pointer;
+}
