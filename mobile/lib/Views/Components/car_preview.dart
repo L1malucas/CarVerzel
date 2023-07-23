@@ -1,74 +1,22 @@
 import 'package:flutter/material.dart';
 import '../../Models/car_model.dart';
-import '../../Services/car_request.dart';
 import '../Widgets/fixed_spacer_widget.dart';
 import 'car_component.dart';
 
-enum CarListType {
-  allCars,
-  carsByPrice,
-}
 
-//ignore: must_be_immutable
-class CarPreview extends StatefulWidget {
+// ignore: must_be_immutable
+class CarPreview extends StatelessWidget {
   CarPreview({
     this.height,
-    required this.carIndex,
-    required this.carListType,
+    required this.car,
     Key? key,
   }) : super(key: key);
 
   double? height;
-  int carIndex;
-  CarListType carListType;
-  @override
-  State<CarPreview> createState() => _CarPreviewState();
-}
-
-class _CarPreviewState extends State<CarPreview> {
-  List<CarModel> _carrosAll = [];
-  List<CarModel> _carrosPrice = [];
-
-  @override
-  void initState() {
-    super.initState();
-    _fetchData();
-  }
-
-  Future<void> _fetchData() async {
-    try {
-      if (widget.carListType == CarListType.allCars && _carrosAll.isEmpty) {
-        _carrosAll = await CarRequest.getAllCars();
-      } else if (widget.carListType == CarListType.carsByPrice &&
-          _carrosPrice.isEmpty) {
-        _carrosPrice = await CarRequest.getCarPrice();
-      }
-      setState(() {});
-    } catch (e) {
-      debugPrint('Error fetching car details: $e');
-    }
-  }
+  CarModel car;
 
   @override
   Widget build(BuildContext context) {
-    List<CarModel> carList;
-    if (widget.carListType == CarListType.allCars) {
-      carList = _carrosAll;
-    } else if (widget.carListType == CarListType.carsByPrice) {
-      carList = _carrosPrice;
-    } else {
-      carList = [];
-    }
-
-    CarModel car;
-    if (carList.isNotEmpty && widget.carIndex < carList.length) {
-      car = carList[widget.carIndex];
-    } else {
-      return const Center(
-        child: CircularProgressIndicator(),
-      );
-    }
-
     return InkWell(
       child: Container(
         padding: const EdgeInsets.only(left: 4),
@@ -87,14 +35,11 @@ class _CarPreviewState extends State<CarPreview> {
                     width: double.infinity,
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(4.0),
-                      //PATH DA IMAGEM
-                      child: carList.isNotEmpty
-                          ? Image.asset(
-                              'assets/images/mock_car.png',
-                              fit: BoxFit.cover,
-                              height: widget.height,
-                            )
-                          : const LinearProgressIndicator(),
+                      child: Image.asset(
+                        'assets/images/mock_car.png',
+                        fit: BoxFit.cover,
+                        height: height,
+                      ),
                     ),
                   ),
                 ],
@@ -103,22 +48,18 @@ class _CarPreviewState extends State<CarPreview> {
               SizedBox(
                 width: double.infinity,
                 height: 30,
-                child: carList.isNotEmpty
-                    ? Text('${car.marca}  ${car.modelo}')
-                    : const LinearProgressIndicator(),
+                child: Text('${car.marca}  ${car.modelo}'),
               ),
               SizedBox(
                 height: 20,
-                child: carList.isNotEmpty
-                    ? Text(
-                        'PREÇO R\$${car.preco}',
-                        style: const TextStyle(
-                          fontSize: 14,
-                          color: Colors.black87,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      )
-                    : const LinearProgressIndicator(),
+                child: Text(
+                  'PREÇO R\$${car.preco}',
+                  style: const TextStyle(
+                    fontSize: 14,
+                    color: Colors.black87,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
             ],
           ),
@@ -126,9 +67,11 @@ class _CarPreviewState extends State<CarPreview> {
       ),
       onTap: () {
         Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => CarComponent(carId: car.id)));
+          context,
+          MaterialPageRoute(
+            builder: (context) => CarComponent(carId: car.id),
+          ),
+        );
       },
     );
   }

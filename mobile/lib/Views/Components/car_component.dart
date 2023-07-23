@@ -18,10 +18,10 @@ class _CarComponentState extends State<CarComponent> {
   @override
   void initState() {
     super.initState();
-    getAll();
+    getId();
   }
 
-  Future<void> getAll() async {
+  Future<void> getId() async {
     try {
       final carroModel = await CarRequest.getCarId(widget.carId);
       setState(() {
