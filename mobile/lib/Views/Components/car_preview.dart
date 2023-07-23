@@ -34,16 +34,23 @@ class CarPreview extends StatelessWidget {
                     width: double.infinity,
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(4.0),
-                      child: Image.asset(
-                        'assets/images/mock_car.png',
+                      child: Image.network(
+                        car.foto,
                         fit: BoxFit.cover,
                         height: height,
+                        errorBuilder: (context, error, stackTrace) {
+                          return Image.asset(
+                            'assets/images/car_not_found.png',
+                            fit: BoxFit.cover,
+                            height: height,
+                          );
+                        },
                       ),
                     ),
                   ),
                 ],
               ),
-              FixedSpacer.vNormal(),
+              FixedSpacer.vSmaller(),
               SizedBox(
                 width: double.infinity,
                 height: 30,

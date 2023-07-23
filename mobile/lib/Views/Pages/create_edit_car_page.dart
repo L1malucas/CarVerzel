@@ -70,157 +70,164 @@ class _CreateEditCarState extends State<CreateEditCar> {
             : const Text('Adicionar carro'),
         centerTitle: true,
       ),
-      body: SafeArea(
-          child: SingleChildScrollView(
-        child: Center(
-          child: Padding(
-              padding: const EdgeInsets.all(24.0),
-              child: Column(
-                children: [
-                  Form(
-                    key: _formKey,
-                    child: Column(
-                      children: [
-                        TextFormField(
-                          controller: _modeloFormController,
-                          keyboardType: TextInputType.name,
-                          decoration: InputDecoration(
-                            fillColor: Colors.grey.shade300,
-                            hintText: "Digite o modelo",
-                            border: const OutlineInputBorder(),
-                            filled: true,
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: Theme.of(context).primaryColor),
-                              borderRadius: BorderRadius.circular(4),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  color:
-                                      Theme.of(context).colorScheme.secondary),
-                              borderRadius: BorderRadius.circular(4),
-                            ),
-                          ),
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Preencha o modelo';
-                            }
-                            return null;
-                          },
-                        ),
-                        FixedSpacer.vNormal(),
-                        TextFormField(
-                          controller: _marcaFormController,
-                          keyboardType: TextInputType.name,
-                          decoration: InputDecoration(
-                            fillColor: Colors.grey.shade300,
-                            hintText: "Digite o marca",
-                            border: const OutlineInputBorder(),
-                            filled: true,
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: Theme.of(context).primaryColor),
-                              borderRadius: BorderRadius.circular(4),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  color:
-                                      Theme.of(context).colorScheme.secondary),
-                              borderRadius: BorderRadius.circular(4),
-                            ),
-                          ),
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Preencha o marca';
-                            }
-                            return null;
-                          },
-                        ),
-                        FixedSpacer.vNormal(),
-                        TextFormField(
-                          controller: _precoFormController,
-                          keyboardType: TextInputType.name,
-                          decoration: InputDecoration(
-                            fillColor: Colors.grey.shade300,
-                            hintText: "Digite o preço",
-                            border: const OutlineInputBorder(),
-                            filled: true,
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: Theme.of(context).primaryColor),
-                              borderRadius: BorderRadius.circular(4),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  color:
-                                      Theme.of(context).colorScheme.secondary),
-                              borderRadius: BorderRadius.circular(4),
-                            ),
-                          ),
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Preencha o preço';
-                            }
-                            return null;
-                          },
-                        ),
-                        FixedSpacer.vNormal(),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            InkWell(
-                              child: Container(
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(2.0),
-                                    color: Colors.blue[100],
-                                    border: Border.all(
-                                        color: Colors.white, width: 2.0)),
-                                width: 70,
-                                height: 70,
-                                child: Icon(
-                                  Icons.add,
-                                  color: Colors.blue[700],
-                                  size: 24,
-                                ),
+      body: GestureDetector(
+        onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+        child: SafeArea(
+            child: SingleChildScrollView(
+          child: Center(
+            child: Padding(
+                padding: const EdgeInsets.all(24.0),
+                child: Column(
+                  children: [
+                    Form(
+                      key: _formKey,
+                      child: Column(
+                        children: [
+                          FixedSpacer.vBiggest(),
+                          TextFormField(
+                            controller: _modeloFormController,
+                            keyboardType: TextInputType.name,
+                            decoration: InputDecoration(
+                              fillColor: Colors.grey.shade300,
+                              hintText: "Digite o modelo",
+                              border: const OutlineInputBorder(),
+                              filled: true,
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Theme.of(context).primaryColor),
+                                borderRadius: BorderRadius.circular(4),
                               ),
-                              onTap: () async {
-                                await pickImage();
-                              },
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .secondary),
+                                borderRadius: BorderRadius.circular(4),
+                              ),
                             ),
-                            imageFile != null
-                                ? Image.file(
-                                    imageFile!,
-                                    width: 70,
-                                    height: 70,
-                                  )
-                                : Container(),
-                          ],
-                        ),
-                        FixedSpacer.vNormal(),
-                        ConstrainedBox(
-                          constraints: const BoxConstraints(
-                              minHeight: 60, minWidth: 200),
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              padding: const EdgeInsets.all(24.0),
-                            ),
-                            child: const Text(
-                              'Salvar',
-                              style: TextStyle(
-                                  color: Colors.black87, fontSize: 20),
-                            ),
-                            onPressed: () {
-                              widget.isEdit ? _updateCar() : _createCar();
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Preencha o modelo';
+                              }
+                              return null;
                             },
                           ),
-                        ),
-                      ],
+                          FixedSpacer.vNormal(),
+                          TextFormField(
+                            controller: _marcaFormController,
+                            keyboardType: TextInputType.name,
+                            decoration: InputDecoration(
+                              fillColor: Colors.grey.shade300,
+                              hintText: "Digite o marca",
+                              border: const OutlineInputBorder(),
+                              filled: true,
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Theme.of(context).primaryColor),
+                                borderRadius: BorderRadius.circular(4),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .secondary),
+                                borderRadius: BorderRadius.circular(4),
+                              ),
+                            ),
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Preencha o marca';
+                              }
+                              return null;
+                            },
+                          ),
+                          FixedSpacer.vNormal(),
+                          TextFormField(
+                            controller: _precoFormController,
+                            keyboardType: TextInputType.number,
+                            decoration: InputDecoration(
+                              fillColor: Colors.grey.shade300,
+                              hintText: "Digite o preço",
+                              border: const OutlineInputBorder(),
+                              filled: true,
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Theme.of(context).primaryColor),
+                                borderRadius: BorderRadius.circular(4),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .secondary),
+                                borderRadius: BorderRadius.circular(4),
+                              ),
+                            ),
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Preencha o preço';
+                              }
+                              return null;
+                            },
+                          ),
+                          FixedSpacer.vNormal(),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              InkWell(
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(2.0),
+                                      color: Colors.blue[100],
+                                      border: Border.all(
+                                          color: Colors.white, width: 2.0)),
+                                  width: 70,
+                                  height: 70,
+                                  child: Icon(
+                                    Icons.add,
+                                    color: Colors.blue[700],
+                                    size: 24,
+                                  ),
+                                ),
+                                onTap: () async {
+                                  await pickImage();
+                                },
+                              ),
+                              imageFile != null
+                                  ? Image.file(
+                                      imageFile!,
+                                      width: 70,
+                                      height: 70,
+                                    )
+                                  : Container(),
+                            ],
+                          ),
+                          FixedSpacer.vNormal(),
+                          ConstrainedBox(
+                            constraints: const BoxConstraints(
+                                minHeight: 60, minWidth: 200),
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                padding: const EdgeInsets.all(24.0),
+                              ),
+                              child: const Text(
+                                'Salvar',
+                                style: TextStyle(
+                                    color: Colors.black87, fontSize: 20),
+                              ),
+                              onPressed: () {
+                                widget.isEdit ? _updateCar() : _createCar();
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                ],
-              )),
-        ),
-      )),
+                  ],
+                )),
+          ),
+        )),
+      ),
     );
   }
 
@@ -254,7 +261,7 @@ class _CreateEditCarState extends State<CreateEditCar> {
         modelo: _modeloFormController.text,
         marca: _marcaFormController.text,
         preco: double.parse(_precoFormController.text),
-        foto: _fotoFormController.text,
+        // foto: imageFile!.path as File,
       );
 
       try {

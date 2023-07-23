@@ -138,7 +138,7 @@ class _CarListPageState extends State<CarListPage> {
                       itemBuilder: (context, index) {
                         return CarPreview(
                           car: _carrosPrice[index],
-                          height: 100,
+                          height: 110,
                         );
                       },
                     ),
