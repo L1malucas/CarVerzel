@@ -4,84 +4,86 @@ using CarVerzel.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
 
-namespace CarVerzel.Controllers;
-
-[Route("api/carros")]
-[ApiController]
-public class CarrosController : ControllerBase
+namespace CarVerzel.Controllers
 {
-    private readonly CarVerzelContext _context;
-
-    public CarrosController(CarVerzelContext context)
+    [Route("api/carros")]
+    [ApiController]
+    public class CarrosController : ControllerBase
     {
-        _context = context;
-    }
+        private readonly CarVerzelContext _context;
 
-    [HttpGet]
-    public ActionResult<IEnumerable<Carro>> GetCarros()
-    {
-        return _context.Carros!.ToList();
-    }
-
-    [HttpGet("{id}")]
-    public ActionResult<Carro> GetCarro(int id)
-    {
-        var carro = _context.Carros!.Find(id);
-
-        if (carro == null)
+        public CarrosController(CarVerzelContext context)
         {
-            return NotFound();
+            _context = context;
         }
 
-        return carro;
-    }
-
-    [HttpGet("preco")]
-    public async Task<ActionResult<IEnumerable<Carro>>> GetCarrosOrdenadosPorPreco()
-    {
-        var carrosOrdenados = await _context.Carros!.OrderBy(c => c.Preco).ToListAsync();
-        return carrosOrdenados;
-    }
-
-    [HttpPost]
-    [Authorize(Roles = "admin")]
-    public ActionResult<Carro> PostCarro(Carro carro)
-    {
-        _context.Carros!.Add(carro);
-        _context.SaveChanges();
-
-        return CreatedAtAction(nameof(GetCarro), new { id = carro.CarId }, carro);
-    }
-
-    [HttpPut("{id}")]
-    [Authorize(Roles = "admin")]
-    public IActionResult PutCarro(int id, Carro carro)
-    {
-        if (id != carro.CarId)
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Carro>>> GetCarros()
         {
-            return BadRequest();
+            var carros = await _context.Carros!.ToListAsync();
+            return carros;
         }
 
-        _context.Entry(carro).State = EntityState.Modified;
-        _context.SaveChanges();
-
-        return NoContent();
-    }
-
-    [HttpDelete("{id}")]
-    [Authorize(Roles = "admin")]
-    public IActionResult DeleteCarro(int id)
-    {
-        var carro = _context.Carros!.Find(id);
-
-        if (carro == null)
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Carro>> GetCarro(int id)
         {
-            return NotFound();
+            var carro = await _context.Carros!.FindAsync(id);
+
+            if (carro == null)
+            {
+                return NotFound();
+            }
+
+            return carro;
         }
 
-        _context.Carros.Remove(carro);
-        _context.SaveChanges();
+        [HttpGet("preco")]
+        public async Task<ActionResult<IEnumerable<Carro>>> GetCarrosOrdenadosPorPreco()
+        {
+            var carrosOrdenados = await _context.Carros!.OrderBy(c => c.Preco).ToListAsync();
+            return carrosOrdenados;
+        }
 
-        return NoContent();
+        [HttpPost]
+        [Authorize(Roles = "admin")]
+        public async Task<ActionResult<Carro>> PostCarro(Carro carro)
+        {
+            _context.Carros!.Add(carro);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction(nameof(GetCarro), new { id = carro.CarId }, carro);
+        }
+
+        [HttpPut("{id}")]
+        [Authorize(Roles = "admin")]
+        public async Task<IActionResult> PutCarro(int id, Carro carro)
+        {
+            if (id != carro.CarId)
+            {
+                return BadRequest();
+            }
+
+            _context.Entry(carro).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        [Authorize(Roles = "admin")]
+        public async Task<IActionResult> DeleteCarro(int id)
+        {
+            var carro = await _context.Carros!.FindAsync(id);
+
+            if (carro == null)
+            {
+                return NotFound();
+            }
+
+            _context.Carros.Remove(carro);
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
     }
 }
