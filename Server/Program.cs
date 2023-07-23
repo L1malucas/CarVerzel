@@ -70,22 +70,28 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 // Connection para banco local
-// builder.Services.AddDbContext<CarVerzelContext>(options =>
-// {
-//     options.UseSqlServer(builder.Configuration.GetConnectionString("CarVerzelLocalDb"));
-// });
-
-// conexão com azure em produção
-string azureDbConnectionString = builder.Configuration.GetConnectionString("CarVerzelAzureDb");
 builder.Services.AddDbContext<CarVerzelContext>(options =>
 {
-    options.UseSqlServer(azureDbConnectionString);
+    options.UseSqlServer(builder.Configuration.GetConnectionString("CarVerzelLocalDb"));
 });
 
-builder.Services.AddCors(p => p.AddPolicy("CarVerzel", builder =>
-    {
-        builder.WithOrigins("*").AllowAnyMethod().AllowAnyHeader();
-    }));
+// conexão com azure em produção
+// string azureDbConnectionString = builder.Configuration.GetConnectionString("CarVerzelAzureDb");
+// builder.Services.AddDbContext<CarVerzelContext>(options =>
+// {
+//     options.UseSqlServer(azureDbConnectionString);
+// });
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowLocalhost4200",
+        builder =>
+        {
+            builder.WithOrigins("http://localhost:4200")
+                   .AllowAnyHeader()
+                   .AllowAnyMethod();
+        });
+});
 
 var app = builder.Build();
 
@@ -96,7 +102,7 @@ app.UseSwaggerUI(c =>
 });
 
 app.UseHttpsRedirection();
-app.UseCors("CarVerzel");
+app.UseCors("AllowLocalhost4200");
 app.UseAuthentication();
 app.UseAuthorization();
 

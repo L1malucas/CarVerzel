@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "d:\\Code\\CarVerzel\\Server\\Server.csproj": {}
+    "D:\\Code\\CarVerzel\\Server\\Server.csproj": {}
   },
   "projects": {
-    "d:\\Code\\CarVerzel\\Server\\Server.csproj": {
+    "D:\\Code\\CarVerzel\\Server\\Server.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "d:\\Code\\CarVerzel\\Server\\Server.csproj",
+        "projectUniqueName": "D:\\Code\\CarVerzel\\Server\\Server.csproj",
         "projectName": "Server",
-        "projectPath": "d:\\Code\\CarVerzel\\Server\\Server.csproj",
+        "projectPath": "D:\\Code\\CarVerzel\\Server\\Server.csproj",
         "packagesPath": "C:\\Users\\lucas\\.nuget\\packages\\",
-        "outputPath": "d:\\Code\\CarVerzel\\Server\\obj\\",
+        "outputPath": "D:\\Code\\CarVerzel\\Server\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\lucas\\AppData\\Roaming\\NuGet\\NuGet.Config",
