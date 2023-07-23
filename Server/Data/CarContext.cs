@@ -17,7 +17,7 @@ public class CarVerzelContext : DbContext
         modelBuilder.Entity<Carro>(entity =>
         {
             entity.Property(e => e.Preco)
-                .HasColumnType("decimal(10, 2)");
+                .HasColumnType("decimal(10, 3)");
         });
     }
 }
