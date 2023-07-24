@@ -261,6 +261,7 @@ class _CreateEditCarState extends State<CreateEditCar> {
         modelo: _modeloFormController.text,
         marca: _marcaFormController.text,
         preco: double.parse(_precoFormController.text),
+        foto: '',
         // foto: imageFile!.path as File,
       );
 

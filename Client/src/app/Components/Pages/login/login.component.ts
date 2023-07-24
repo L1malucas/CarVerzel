@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../../../Services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,11 @@ export class LoginComponent {
   username: string = '';
   password: string = '';
 
-  constructor(private http: HttpClient, private authService: AuthService) {}
+  constructor(
+    private http: HttpClient,
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
   onSubmit() {
     const loginData = {
@@ -27,6 +32,7 @@ export class LoginComponent {
             this.authService.setToken(response.token);
             console.log('validado');
           }
+          this.router.navigate(['']);
         },
         (error) => {
           console.error('Falha no login:', error);

@@ -4,7 +4,7 @@
 
 namespace Server.Migrations
 {
-    public partial class IfNot : Migration
+    public partial class Tes : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

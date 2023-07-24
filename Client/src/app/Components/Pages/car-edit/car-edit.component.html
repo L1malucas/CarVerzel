@@ -1,42 +1,48 @@
-<div class="center-container">
-  <div class="form-container">
-    <h2 class="text-center mb-4">Editar Carro</h2>
-    <div *ngIf="car">
-      <div class="form-group">
-        <label for="modelo">Modelo:</label>
-        <input
-          type="text"
-          class="form-control"
-          id="modelo"
-          [(ngModel)]="car.modelo"
-          name="modelo"
-          required
-        />
-      </div>
-      <div class="form-group">
-        <label for="marca">Marca:</label>
-        <input
-          type="text"
-          class="form-control"
-          id="marca"
-          [(ngModel)]="car.marca"
-          name="marca"
-          required
-        />
-      </div>
-      <div class="form-group">
-        <label for="preco">Preço:</label>
-        <input
-          type="number"
-          class="form-control"
-          id="preco"
-          [(ngModel)]="car.preco"
-          name="preco"
-          required
-        />
-      </div>
+<div class="center-screen">
+  <div class="center-container">
+    <div class="form-container">
+      <h2 class="text-center mb-4">Editar Carro</h2>
 
-      <button class="btn btn-primary" (click)="saveCar()">Salvar</button>
+      <div *ngIf="car">
+        <img [src]="car.foto" alt="Car Image" class="car-image" />
+
+        <div class="form-group">
+          <label for="modelo">Modelo:</label>
+          <input
+            type="text"
+            class="form-control"
+            id="modelo"
+            [(ngModel)]="car.modelo"
+            name="modelo"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="marca">Marca:</label>
+          <input
+            type="text"
+            class="form-control"
+            id="marca"
+            [(ngModel)]="car.marca"
+            name="marca"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="preco">Preço:</label>
+          <input
+            type="number"
+            class="form-control"
+            id="preco"
+            [(ngModel)]="car.preco"
+            name="preco"
+            required
+          />
+        </div>
+
+        <button class="btn btn-primary" (click)="saveCar()">Salvar</button>
+        <button class="btn btn-danger" (click)="deleteCar()">Excluir</button>
+      </div>
     </div>
   </div>
 </div>

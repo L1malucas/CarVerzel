@@ -17,3 +17,16 @@ img {
 .card-custom-bg {
   background-color: #f0f0f0;
 }
+.center-screen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.car-image {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin-bottom: 1rem;
+}
