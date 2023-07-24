@@ -1,0 +1,17 @@
+<div *ngIf="car">
+  <h2>Edit Car</h2>
+  <div class="form-group">
+    <label for="modelo">Modelo:</label>
+    <input type="text" id="modelo" [(ngModel)]="car.modelo" class="form-control" />
+  </div>
+  <div class="form-group">
+    <label for="marca">Marca:</label>
+    <input type="text" id="marca" [(ngModel)]="car.marca" class="form-control" />
+  </div>
+  <div class="form-group">
+    <label for="preco">Preço:</label>
+    <input type="number" id="preco" [(ngModel)]="car.preco" class="form-control" />
+  </div>
+
+<button class="btn btn-primary" (click)="saveCar()">Salvar</button>
+</div>
