@@ -1,5 +1,4 @@
 {
-  "dotnet.defaultSolution": "Server/Server.sln",
   "appService.defaultWebAppToDeploy": "/subscriptions/2da6e258-9d1a-4252-b9da-52bc459ddd3e/resourceGroups/appsvc_linux_centralus/providers/Microsoft.Web/sites/carverzelclient",
-  "appService.deploySubpath": "Client\\dist\\client"
+  "appService.deploySubpath": "dist"
 }
