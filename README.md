@@ -142,7 +142,7 @@ Endpoint para excluir um carro do banco de dados. Requer autenticação, apenas 
 **CarEditComponent:** Componente responsável por exibir o formulário de edição de um carro existente. A rota '/carros/:id' direciona para esse componente, onde ":id" é o ID do carro que será editado.
 
 ### Flutter App
-Caso deseje testar a aplicação, sem instalar o SDK ou atualizar o flutter, dois instaladores (IOS/ANDROID) estão disponíves na pasta *instaladores*.
+Caso deseje testar a aplicação, sem instalar o SDK ou atualizar o flutter, dois instaladores (ANDROID) disponível na pasta *instaladores*.
 
 **Widgets:** Três widgets customizados por mim, são usados na aplicação (alerta, espaçador e indicador de carregamento), para facilitar interação com usuário.
 
@@ -154,4 +154,8 @@ Caso deseje testar a aplicação, sem instalar o SDK ou atualizar o flutter, doi
 - Página que ao mesmo tempo cria ou edita, dependendo se foi informado ou não o *carId*
 - Página de login, responsável por logar e salvar o *token* de resposta. Ao logar com sucesso, são exibidos o botão de adicionar um carro (POST) e editar e excluir ao visualizar detalhes de um único carro (PUT e DELETE) 
 
-### 
+### Não Atingidos
+
+Citarei alguns objetivos que não conseguir atingir dos requisitos:
+1. Salvar imagem no Backend e banco de dados
+2. Handle de arquivo no Frontend
