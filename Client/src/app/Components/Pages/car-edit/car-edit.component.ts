@@ -29,7 +29,7 @@ export class CarEditComponent implements OnInit {
   }
 
   fetchCarData(carId: number) {
-    const apiUrl = `https://localhost:7094/api/carros/${carId}`;
+    const apiUrl = `https://carverzelapi.azurewebsites.net/api/carros/${carId}`;
     this.http.get<Car>(apiUrl).subscribe(
       (data) => {
         this.car = data;
@@ -40,7 +40,7 @@ export class CarEditComponent implements OnInit {
     );
   }
   saveCar() {
-    const apiUrl = `https://localhost:7094/api/carros/${this.car.carId}`;
+    const apiUrl = `https://carverzelapi.azurewebsites.net/api/carros/${this.car.carId}`;
     this.http.put(apiUrl, this.car).subscribe(
       (data) => {
         console.log('Carro atualizado:', data);

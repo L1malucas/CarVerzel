@@ -20,7 +20,7 @@ export class LoginComponent {
     };
 
     this.http
-      .post<any>('https://localhost:7094/api/login', loginData)
+      .post<any>('https://carverzelapi.azurewebsites.net/api/login', loginData)
       .subscribe(
         (response) => {
           if (response && response.token) {

@@ -16,7 +16,7 @@ export class CarListComponent implements OnInit {
   }
 
   fetchCars() {
-    const apiUrl = 'https://localhost:7094/api/carros/preco';
+    const apiUrl = 'https://carverzelapi.azurewebsites.net/api/carros/preco';
     this.http.get<Car[]>(apiUrl).subscribe(
       (data) => {
         this.cars = data;

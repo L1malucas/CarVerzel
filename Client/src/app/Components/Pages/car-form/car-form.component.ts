@@ -24,7 +24,7 @@ export class CarFormComponent {
       formData.append('foto', this.foto, this.foto.name);
     }
 
-    const apiUrl = 'https://localhost:7094/api/carros';
+    const apiUrl = 'https://carverzelapi.azurewebsites.net/api/carros';
 
     const token = new AuthService().getToken();
 
