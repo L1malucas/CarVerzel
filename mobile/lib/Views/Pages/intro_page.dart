@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../Models/car_model.dart';
-import '../../Services/car_request.dart';
 import '../../utils/constants.dart';
 import '../Widgets/fixed_spacer_widget.dart';
 import '../Widgets/loading_widget.dart';
@@ -17,25 +15,6 @@ class IntroPage extends StatefulWidget {
 }
 
 class _IntroPageState extends State<IntroPage> {
-  List<CarModel> _carros = [];
-
-  @override
-  void initState() {
-    super.initState();
-    _loadCar();
-  }
-
-  Future<void> _loadCar() async {
-    try {
-      final carrosList = await CarRequest.getAllCars();
-      setState(() {
-        _carros = carrosList;
-      });
-    } catch (e) {
-      debugPrint('Error fetching carro details: $e');
-    }
-  }
-
   @override
   Widget build(context) {
     return Scaffold(
@@ -94,14 +73,16 @@ class _IntroPageState extends State<IntroPage> {
             ),
             child: const Text(
               'Vamos Começar!',
-              style: TextStyle(color: Colors.black87, fontSize: 20),
+              style: TextStyle(
+                  color: Colors.black87,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold),
             ),
             onPressed: () {
               LoadingWidget.showProgressDialog(
                   context,
                   'Carregando a vitrine',
                   CarListPage(
-                    lenght: _carros.length,
                     isTokenValidado: false,
                   ));
             },

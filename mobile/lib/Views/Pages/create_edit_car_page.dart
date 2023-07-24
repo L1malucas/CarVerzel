@@ -266,11 +266,11 @@ class _CreateEditCarState extends State<CreateEditCar> {
       );
 
       try {
-        await CarRequest.postCar(adminToken, newCar);
+        await CarRequest.postCar(adminToken!, newCar);
         LoadingWidget.showProgressDialog(
           context,
           "Carro criado! \n Você será redirecionado para a vitrine",
-          CarListPage.withoutLength(isTokenValidado: true),
+          CarListPage(isTokenValidado: true),
         );
       } catch (e) {
         Alert(
@@ -295,11 +295,11 @@ class _CreateEditCarState extends State<CreateEditCar> {
       existingCar.foto = imageFile!.path;
 
       try {
-        await CarRequest.putCar(adminToken, _currentId, existingCar);
+        await CarRequest.putCar(adminToken!, _currentId, existingCar);
         LoadingWidget.showProgressDialog(
           context,
           "Carro atualizado! \n Você será redirecionado para a vitrine",
-          CarListPage.withoutLength(isTokenValidado: true),
+          CarListPage(isTokenValidado: true),
         );
       } catch (e) {
         Alert(
@@ -317,13 +317,13 @@ class _CreateEditCarState extends State<CreateEditCar> {
     debugPrint('entrou');
 
     try {
-      await CarRequest.deleteCar(adminToken, carId);
+      await CarRequest.deleteCar(adminToken!, carId);
       debugPrint('no metodo $carId');
 
       LoadingWidget.showProgressDialog(
         context,
         "Carro deletado! \n Você será redirecionado para a vitrine",
-        CarListPage.withoutLength(isTokenValidado: true),
+        CarListPage(isTokenValidado: true),
       );
     } catch (e) {
       Alert(

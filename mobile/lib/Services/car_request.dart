@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import '../Models/car_model.dart';
 import '../utils/constants.dart';
 
-String adminToken = Constants.adminToken.toString();
+String? adminToken = Constants.adminToken.toString();
 
 class CarRequest {
   static const baseUrl = '${Constants.apiAzure}/carros';

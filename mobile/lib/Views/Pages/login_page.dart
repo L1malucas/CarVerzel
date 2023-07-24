@@ -40,7 +40,7 @@ class _LoginPageState extends State<LoginPage> {
                   padding: const EdgeInsets.all(24.0),
                   decoration: BoxDecoration(color: Colors.grey.shade800),
                   width: double.infinity,
-                  height: 300,
+                  height: 310,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -52,13 +52,13 @@ class _LoginPageState extends State<LoginPage> {
                             fontWeight: FontWeight.bold,
                             color: Colors.white),
                       ),
-                      FixedSpacer.vSmaller(),
+                      FixedSpacer.vSmallest(),
                       const Text(
                         'Necessário acesso para incluir, editar e excluir carros',
                         textAlign: TextAlign.justify,
                         style: TextStyle(fontSize: 18, color: Colors.white),
                       ),
-                      FixedSpacer.vNormal(),
+                      FixedSpacer.vSmaller(),
                       Center(
                         child: SizedBox(
                           child: DataTable(
@@ -197,11 +197,11 @@ class _LoginPageState extends State<LoginPage> {
         final token = loginData['token'];
         Constants.adminToken = token;
         bool tokenValidado = Constants.adminToken != null;
-
+        Constants.isLogged = true;
         LoadingWidget.showProgressDialog(
             context,
             "Validando o login \n Você será redirecionado em caso de sucesso",
-            CarListPage.withoutLength(
+            CarListPage(
               isTokenValidado: tokenValidado,
             ));
       } catch (e) {

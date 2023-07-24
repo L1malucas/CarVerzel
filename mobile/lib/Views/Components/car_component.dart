@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobile/Models/car_model.dart';
 import 'package:mobile/Views/Pages/create_edit_car_page.dart';
+import 'package:mobile/utils/constants.dart';
 import '../../Services/car_request.dart';
 import '../Widgets/fixed_spacer_widget.dart';
 
@@ -49,7 +50,7 @@ class _CarComponentState extends State<CarComponent> {
       appBar: AppBar(
         actions: [
           Visibility(
-            visible: adminToken.isNotEmpty,
+            visible: Constants.isLogged,
             child: IconButton(
                 onPressed: () {
                   Navigator.push(
@@ -75,30 +76,39 @@ class _CarComponentState extends State<CarComponent> {
               children: [
                 FixedSpacer.vNormal(),
                 _carModel?.marca != null
-                    ? Text(
-                        _carModel?.marca.toUpperCase() ??
-                            'Marca não encontrada.',
-                        style: const TextStyle(
-                            fontSize: 32, fontWeight: FontWeight.bold),
+                    ? SizedBox(
+                        width: double.infinity,
+                        child: Text(
+                          _carModel?.marca.toUpperCase() ??
+                              'Marca não encontrada.',
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(
+                              fontSize: 32, fontWeight: FontWeight.bold),
+                        ),
                       )
                     : const CircularProgressIndicator(),
                 FixedSpacer.vSmallest(),
                 _carModel?.modelo != null
-                    ? Text(
-                        _carModel?.modelo.toUpperCase() ??
-                            'Marca não encontrada.',
-                        style: const TextStyle(
-                            fontSize: 32, fontWeight: FontWeight.bold),
+                    ? SizedBox(
+                        width: double.infinity,
+                        child: Text(
+                          _carModel?.modelo.toUpperCase() ??
+                              'Marca não encontrada.',
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(fontSize: 32),
+                        ),
                       )
                     : const CircularProgressIndicator(),
                 FixedSpacer.vNormal(),
                 FixedSpacer.vBiggest(),
-                Image.asset(
-                  'assets/images/mock_car.png',
-                  fit: BoxFit.cover,
-                  width: double.infinity,
-                  height: 300,
-                ),
+                _carModel?.modelo != null
+                    ? Image.network(
+                        '${_carModel?.foto}',
+                        fit: BoxFit.cover,
+                        width: double.infinity,
+                        height: 300,
+                      )
+                    : const CircularProgressIndicator(),
                 FixedSpacer.vBiggest(),
               ],
             ),

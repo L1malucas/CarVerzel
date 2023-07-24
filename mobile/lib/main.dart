@@ -12,7 +12,7 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: const IntroPage(),
-      theme: ThemeData(useMaterial3: true),
+      theme: ThemeData(fontFamily: 'Poppins', useMaterial3: true),
       debugShowCheckedModeBanner: false,
     );
   }

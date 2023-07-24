@@ -9,16 +9,11 @@ import 'package:mobile/Views/Pages/login_page.dart';
 class CarListPage extends StatefulWidget {
   CarListPage({
     required this.isTokenValidado,
-    required this.lenght,
     Key? key,
   }) : super(key: key);
 
-  int lenght;
+  // int lenght;
   bool isTokenValidado;
-
-  CarListPage.withoutLength({required this.isTokenValidado, Key? key})
-      : lenght = 0,
-        super(key: key);
 
   @override
   State<CarListPage> createState() => _CarListPageState();
@@ -138,7 +133,7 @@ class _CarListPageState extends State<CarListPage> {
                       itemBuilder: (context, index) {
                         return CarPreview(
                           car: _carrosPrice[index],
-                          height: 110,
+                          height: 100,
                         );
                       },
                     ),
@@ -152,7 +147,7 @@ class _CarListPageState extends State<CarListPage> {
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                     ),
                   ),
-                  Padding(
+                  Container(
                     padding: const EdgeInsets.all(12.0),
                     child: GridView.builder(
                       shrinkWrap: true,

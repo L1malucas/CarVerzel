@@ -50,18 +50,21 @@ class CarPreview extends StatelessWidget {
                   ),
                 ],
               ),
-              FixedSpacer.vSmaller(),
+              FixedSpacer.vNormal(),
               SizedBox(
                 width: double.infinity,
                 height: 30,
-                child: Text('${car.marca}  ${car.modelo}'),
+                child: Text('${car.marca}  ${car.modelo}',
+                    style: const TextStyle(
+                      fontSize: 16,
+                    )),
               ),
               SizedBox(
                 height: 20,
                 child: Text(
-                  'PREÇO R\$${car.preco}',
+                  'R\$${car.preco}',
                   style: const TextStyle(
-                    fontSize: 14,
+                    fontSize: 18,
                     color: Colors.black87,
                     fontWeight: FontWeight.bold,
                   ),

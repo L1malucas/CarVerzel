@@ -26,11 +26,9 @@ flutter:
   assets:
     - assets/images/
 
-  # fonts:
-  #   - family: Roboto
-  #     fonts:
-  #       - asset: assets/fonts/Roboto-Regular.ttf
-  #       - asset: assets/fonts/Roboto-Thin.ttf
-  #         style: italic
-  #       - asset: assets/fonts/Roboto-Bold.ttf
-  #         weight: 700
+  fonts:
+    - family: Poppins
+      fonts:
+        - asset: assets/fonts/Poppins-Regular.ttf
+        - asset: assets/fonts/Poppins-Bold.ttf
+          weight: 700
