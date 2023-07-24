@@ -35,7 +35,7 @@ export class CarEditComponent implements OnInit {
         this.car = data;
       },
       (error) => {
-        console.error('Error fetching car data:', error);
+        console.error('Erro na request:', error);
       }
     );
   }
@@ -43,11 +43,11 @@ export class CarEditComponent implements OnInit {
     const apiUrl = `https://localhost:7094/api/carros/${this.car.carId}`;
     this.http.put(apiUrl, this.car).subscribe(
       (data) => {
-        console.log('Car data updated successfully:', data);
+        console.log('Carro atualizado:', data);
         this.navigateToCarList();
       },
       (error) => {
-        console.error('Error updating car data:', error);
+        console.error('Erro na request:', error);
       }
     );
   }

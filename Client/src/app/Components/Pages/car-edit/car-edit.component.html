@@ -1,0 +1,42 @@
+<div class="center-container">
+  <div class="form-container">
+    <h2 class="text-center mb-4">Editar Carro</h2>
+    <div *ngIf="car">
+      <div class="form-group">
+        <label for="modelo">Modelo:</label>
+        <input
+          type="text"
+          class="form-control"
+          id="modelo"
+          [(ngModel)]="car.modelo"
+          name="modelo"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="marca">Marca:</label>
+        <input
+          type="text"
+          class="form-control"
+          id="marca"
+          [(ngModel)]="car.marca"
+          name="marca"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="preco">Preço:</label>
+        <input
+          type="number"
+          class="form-control"
+          id="preco"
+          [(ngModel)]="car.preco"
+          name="preco"
+          required
+        />
+      </div>
+
+      <button class="btn btn-primary" (click)="saveCar()">Salvar</button>
+    </div>
+  </div>
+</div>

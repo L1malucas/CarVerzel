@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { AuthService } from '../../Services/auth.service';
+import { AuthService } from '../../../Services/auth.service';
 
 @Component({
   selector: 'app-car-form',
@@ -35,7 +35,7 @@ export class CarFormComponent {
 
     this.http.post<any>(apiUrl, formData, { headers }).subscribe(
       (response) => {
-        console.log('Car data sent successfully:', response);
+        console.log('Carro enviado:', response);
 
         this.modelo = '';
         this.marca = '';
@@ -43,7 +43,7 @@ export class CarFormComponent {
         this.foto = null;
       },
       (error) => {
-        console.error('Error sending car data:', error);
+        console.error('Erro ao enviar os dados request', error);
       }
     );
   }
