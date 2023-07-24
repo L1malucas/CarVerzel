@@ -10,7 +10,7 @@ on:
       - main
   workflow_dispatch:
   schedule:
-    - cron: '0 0 * * *' # Daily cron schedule (adjust as needed)
+    - cron: "0 0 * * *" # Daily cron schedule (adjust as needed)
 
 env:
   AZURE_WEBAPP_NAME: carverzelapi
@@ -25,6 +25,9 @@ jobs:
       - uses: actions/checkout@v3
         with:
           submodules: true
+      - name: Install Dependencies
+        run: npm install # or yarn install, depending on your project
+
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
@@ -56,21 +59,21 @@ jobs:
     name: Publish API to Azure Web App
     steps:
       - uses: actions/checkout@v3
-      
+
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: '6.0.x'
-          
+          dotnet-version: "6.0.x"
+
       - name: Restore
         run: dotnet restore ./Server/Server.sln
-        
+
       - name: Build
         run: dotnet build ./Server/Server.sln --configuration Release --no-restore
-        
+
       - name: Publish
         run: dotnet publish ./Server/Server.sln --configuration Release --no-build --output '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}'
-        
+
       - name: Deployment
         uses: azure/webapps-deploy@v2
         with:
