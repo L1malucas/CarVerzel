@@ -10,7 +10,7 @@ on:
       - main
   workflow_dispatch:
   schedule:
-    - cron: "0 0 * * *" # Daily cron schedule (adjust as needed)
+    - cron: '0 0 * * *' # Daily cron schedule (adjust as needed)
 
 env:
   AZURE_WEBAPP_NAME: carverzelapi
@@ -22,11 +22,20 @@ jobs:
     runs-on: ubuntu-latest
     name: Build and Deploy Job
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
         with:
           submodules: true
+          path: /CarVerzel/  # Set the correct path to your repository
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16.x'  # Use the desired Node.js version here
+
       - name: Install Dependencies
-        run: npm install # or yarn install, depending on your project
+        run: npm install  # or yarn install, depending on your project
+        working-directory: ./Client  # Set the correct path to your Angular app
 
       - name: Build And Deploy
         id: builddeploy
@@ -37,7 +46,7 @@ jobs:
           action: "upload"
           ###### Repository/Build Configurations - These values can be configured to match your app requirements. ######
           # For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
-          app_location: "/Client" # App source code path
+          app_location: "./Client" # App source code path
           api_location: "" # Api source code path - optional
           output_location: "/Client/dist/client" # Built app content directory - optional
           ###### End of Repository/Build Configurations ######
@@ -59,21 +68,21 @@ jobs:
     name: Publish API to Azure Web App
     steps:
       - uses: actions/checkout@v3
-
+      
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: "6.0.x"
-
+          dotnet-version: '6.0.x'
+          
       - name: Restore
         run: dotnet restore ./Server/Server.sln
-
+        
       - name: Build
         run: dotnet build ./Server/Server.sln --configuration Release --no-restore
-
+        
       - name: Publish
         run: dotnet publish ./Server/Server.sln --configuration Release --no-build --output '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}'
-
+        
       - name: Deployment
         uses: azure/webapps-deploy@v2
         with:
