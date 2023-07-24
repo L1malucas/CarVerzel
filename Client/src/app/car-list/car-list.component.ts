@@ -22,7 +22,7 @@ export class CarListComponent implements OnInit {
         this.cars = data;
       },
       (error) => {
-        console.error('Error fetching cars:', error);
+        console.error('Erro na requisição:', error);
       }
     );
   }

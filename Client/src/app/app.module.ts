@@ -18,12 +18,6 @@ import { CarFormComponent } from './car-form/car-form.component';
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
   providers: [],
-  bootstrap: [
-    AppComponent,
-    CarListComponent,
-    NavbarComponent,
-    LoginComponent,
-    CarFormComponent,
-  ],
+  bootstrap: [AppComponent],
 })
 export class AppModule {}
