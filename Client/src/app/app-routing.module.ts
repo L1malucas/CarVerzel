@@ -6,7 +6,7 @@ import { CarListComponent } from './car-list/car-list.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'car-list', pathMatch: 'full' }, // This line makes 'car-list' the default route
-  { path: 'car-list', component: CarListComponent },
+  // { path: 'car-list', component: CarListComponent },
   { path: 'login', component: LoginComponent },
   { path: 'add-car', component: CarFormComponent },
 ];
