@@ -30,7 +30,7 @@ jobs:
       # Add the npm install step here
       - name: Install Dependencies
         run: npm install
-        working-directory: ./CarVerzel
+        working-directory: ./CarVerzel # Set the working directory to the root of the repository
 
       - name: Build And Deploy
         id: builddeploy
@@ -64,20 +64,22 @@ jobs:
     name: Publish API to Azure Web App
     steps:
       - uses: actions/checkout@v3
-      
+
+      # Set up .NET and other steps can be added here
+
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: '6.0.x'
           
       - name: Restore
-        run: dotnet restore ./Server/Server.sln
-        
+        run: dotnet restore ./CarVerzel/Server/Server.sln # Adjust the path for the restore step
+
       - name: Build
-        run: dotnet build ./Server/Server.sln --configuration Release --no-restore
-        
+        run: dotnet build ./CarVerzel/Server/Server.sln --configuration Release --no-restore # Adjust the path for the build step
+
       - name: Publish
-        run: dotnet publish ./Server/Server.sln --configuration Release --no-build --output '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}'
+        run: dotnet publish ./CarVerzel/Server/Server.sln --configuration Release --no-build --output '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}' # Adjust the path for the publish step
         
       - name: Deployment
         uses: azure/webapps-deploy@v2
