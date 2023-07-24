@@ -1,8 +1,16 @@
-<div class="car-container">
-  <div *ngFor="let car of cars" class="car-item">
-    <img [src]="car.foto" alt="Car Photo" />
-    <h2>{{ car.modelo }}</h2>
-    <p>{{ car.marca }}</p>
-    <p>Price: {{ car.preco | currency }}</p>
+<div class="container mt-5">
+  <h2>Car List</h2>
+  <div class="row">
+    <div class="col-md-4" *ngFor="let car of cars">
+      <div class="card mb-4 card-custom-bg">
+        <img class="card-img-top" [src]="car.foto" alt="Car Photo" />
+        <div class="card-body">
+          <h5 class="card-title">{{ car.modelo }}</h5>
+          <p class="card-text">{{ car.marca }}</p>
+          <p class="card-text">Price: {{ car.preco | currency }}</p>
+          <a href="#" class="btn btn-primary">Editar</a>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
