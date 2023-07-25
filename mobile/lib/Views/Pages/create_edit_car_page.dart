@@ -171,37 +171,66 @@ class _CreateEditCarState extends State<CreateEditCar> {
                             },
                           ),
                           FixedSpacer.vNormal(),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              InkWell(
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(2.0),
-                                      color: Colors.blue[100],
-                                      border: Border.all(
-                                          color: Colors.white, width: 2.0)),
-                                  width: 70,
-                                  height: 70,
-                                  child: Icon(
-                                    Icons.add,
-                                    color: Colors.blue[700],
-                                    size: 24,
-                                  ),
-                                ),
-                                onTap: () async {
-                                  await pickImage();
-                                },
+                           TextFormField(
+                            controller: _fotoFormController,
+                            keyboardType: TextInputType.number,
+                            decoration: InputDecoration(
+                              fillColor: Colors.grey.shade300,
+                              hintText: "Link da foto",
+                              border: const OutlineInputBorder(),
+                              filled: true,
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Theme.of(context).primaryColor),
+                                borderRadius: BorderRadius.circular(4),
                               ),
-                              imageFile != null
-                                  ? Image.file(
-                                      imageFile!,
-                                      width: 70,
-                                      height: 70,
-                                    )
-                                  : Container(),
-                            ],
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .secondary),
+                                borderRadius: BorderRadius.circular(4),
+                              ),
+                            ),
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Insira um link';
+                              }
+                              return null;
+                            },
                           ),
+                          // AQUI SERIA O ENVIO VIA ARQUIVO, CASO EU CONSEGUISSE UPAR IMAGEM
+                          // Row(
+                          //   mainAxisAlignment: MainAxisAlignment.center,
+                          //   children: [
+                          //     InkWell(
+                          //       child: Container(
+                          //         decoration: BoxDecoration(
+                          //             borderRadius: BorderRadius.circular(2.0),
+                          //             color: Colors.blue[100],
+                          //             border: Border.all(
+                          //                 color: Colors.white, width: 2.0)),
+                          //         width: 70,
+                          //         height: 70,
+                          //         child: Icon(
+                          //           Icons.add,
+                          //           color: Colors.blue[700],
+                          //           size: 24,
+                          //         ),
+                          //       ),
+                          //       onTap: () async {
+                          //         await pickImage();
+                          //       },
+                          //     ),
+                          //     imageFile != null
+                          //         ? Image.file(
+                          //             imageFile!,
+                          //             width: 70,
+                          //             height: 70,
+                          //           )
+                          //         : Container(),
+                          //   ],
+                          // ),
                           FixedSpacer.vNormal(),
                           ConstrainedBox(
                             constraints: const BoxConstraints(
@@ -261,7 +290,7 @@ class _CreateEditCarState extends State<CreateEditCar> {
         modelo: _modeloFormController.text,
         marca: _marcaFormController.text,
         preco: double.parse(_precoFormController.text),
-        foto: '',
+        foto: _fotoFormController.text,
         // foto: imageFile!.path as File,
       );
 
@@ -292,7 +321,7 @@ class _CreateEditCarState extends State<CreateEditCar> {
       existingCar.modelo = _modeloFormController.text;
       existingCar.marca = _marcaFormController.text;
       existingCar.preco = double.parse(_precoFormController.text);
-      existingCar.foto = imageFile!.path;
+      existingCar.foto = _fotoFormController.text;
 
       try {
         await CarRequest.putCar(adminToken!, _currentId, existingCar);

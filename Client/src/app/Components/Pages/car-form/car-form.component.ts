@@ -42,11 +42,14 @@ export class CarFormComponent {
         this.marca = '';
         this.preco = 0;
         this.foto = '';
-
+        confirm('Carro criado!');
         this.router.navigate(['']);
       },
       (error) => {
         console.error('Erro ao enviar os dados request', error);
+        confirm(
+          'Erro na criação do carro.\nVerifique os campos ou se está logado'
+        );
       }
     );
   }

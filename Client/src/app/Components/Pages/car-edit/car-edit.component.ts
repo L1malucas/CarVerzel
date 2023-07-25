@@ -42,6 +42,9 @@ export class CarEditComponent implements OnInit {
   }
 
   saveCar() {
+    if (!confirm('Tem certeza que deseja salvar este carro?')) {
+      return;
+    }
     const apiUrl = `https://carverzelapi.azurewebsites.net/api/carros/${this.car.carId}`;
     const token = this.authService.getToken();
     if (!token) {

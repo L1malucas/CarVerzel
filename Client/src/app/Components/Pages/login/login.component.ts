@@ -31,11 +31,15 @@ export class LoginComponent {
           if (response && response.token) {
             this.authService.setToken(response.token);
             console.log('validado');
+            confirm('Usuário logado');
+          } else {
+            confirm('Usuário ou senha inválidos!s');
           }
           this.router.navigate(['']);
         },
         (error) => {
           console.error('Falha no login:', error);
+          confirm('Falha no login');
         }
       );
   }
