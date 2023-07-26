@@ -76,6 +76,8 @@ export class CarEditComponent implements OnInit {
     const token = this.authService.getToken();
     if (!token) {
       console.log('Necessário login para excluir');
+      confirm('Necessário login para excluir');
+
       return;
     }
 
@@ -86,10 +88,12 @@ export class CarEditComponent implements OnInit {
     this.http.delete(apiUrl, { headers }).subscribe(
       () => {
         console.log('Carro excluído com sucesso!');
+        confirm('Carro excluído com sucesso!');
         this.navigateToCarList();
       },
       (error) => {
         console.error('Erro na requisição:', error);
+        confirm('Erro na requisição');
       }
     );
   }
