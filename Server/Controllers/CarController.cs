@@ -46,10 +46,30 @@ namespace CarVerzel.Controllers
 
         [HttpPost]
         [Authorize(Roles = "admin")]
-        public async Task<ActionResult<Carro>> PostCarro(Carro carro)
+        public async Task<ActionResult<Carro>> PostCarro([FromForm] IFormFile file, [FromForm] Carro carro)
         {
-            _context.Carros!.Add(carro);
-            await _context.SaveChangesAsync();
+            try
+            {
+                using (var fileStream = new MemoryStream())
+                {
+                    file.CopyTo(fileStream);
+                    var createdCar = new Carro()
+                    {
+                        Modelo = carro.Modelo,
+                        Preco = carro.Preco,
+                        Marca = carro.Marca,
+
+                        FotoBase64 = Convert.ToBase64String(fileStream.ToArray()),
+                    };
+                    _context.Carros!.Add(createdCar);
+                }
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Erro ao cadastrar o veiculo");
+            }
+
 
             return CreatedAtAction(nameof(GetCarro), new { id = carro.CarId }, carro);
         }

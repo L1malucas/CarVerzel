@@ -17,5 +17,6 @@ public class Carro
     public decimal Preco { get; set; }
 
     [Required]
-    public string Foto { get; set; } = string.Empty;
+    
+    public string FotoBase64 { get; set; } = string.Empty;
 }
