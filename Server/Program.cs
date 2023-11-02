@@ -70,10 +70,10 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 // Connection para banco local
-//builder.Services.AddDbContext<CarVerzelContext>(options =>
-//{
-//  options.UseSqlServer(builder.Configuration.GetConnectionString("CarVerzelLocalDb"));
-//});
+// builder.Services.AddDbContext<CarVerzelContext>(options =>
+// {
+//     options.UseSqlServer(builder.Configuration.GetConnectionString("CarVerzelLocalDb"));
+// });
 
 // conexão com azure em produção
  string azureDbConnectionString = builder.Configuration.GetConnectionString("CarVerzelAzureDb");
